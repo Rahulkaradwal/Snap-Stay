@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { deleteCabin, getCabins } from '../../services/apiCabins';
-import toast from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+import { getCabins } from '../../services/apiCabins';
 
 // ui components
 import Spinner from '../../ui/Spinner';
