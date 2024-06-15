@@ -24,15 +24,28 @@ export async function deleteCabin(id) {
 
 // create a cabin request
 
-export async function addCabin(data) {
+export async function createEditCabin(data, id) {
+  console.log('first id', id);
   try {
-    await fetch(`${URL}/cabins`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    if (!id) {
+      await fetch(`${URL}/cabins`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    }
+    if (id) {
+      console.log('in the patch request', id);
+      await fetch(`${URL}/cabins/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    }
   } catch (err) {
     throw new Error('Sorry! Could not add Cabin');
   }
