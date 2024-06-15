@@ -1,5 +1,6 @@
 import URL from './URL';
 
+// get all cabins request
 export async function getCabins() {
   const res = await fetch(`${URL}/cabins`);
 
@@ -10,6 +11,7 @@ export async function getCabins() {
   return data.data;
 }
 
+// delete a cabin request
 export async function deleteCabin(id) {
   try {
     await fetch(`${URL}/cabins/${id}`, {
@@ -17,5 +19,21 @@ export async function deleteCabin(id) {
     });
   } catch (err) {
     throw new Error('Could not deleted');
+  }
+}
+
+// create a cabin request
+
+export async function addCabin(data) {
+  try {
+    await fetch(`${URL}/cabins`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    throw new Error('Sorry! Could not add Cabin');
   }
 }

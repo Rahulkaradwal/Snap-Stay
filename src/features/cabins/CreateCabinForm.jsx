@@ -6,22 +6,40 @@ import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addCabin } from '../../services/apiCabins';
+import toast from 'react-hot-toast';
 
 function CreateCabinForm() {
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const { mutate, isLoading: isCreating } = useMutation({
+    mutationFn: addCabin,
+    onSuccess: () => {
+      toast.success('Cabin added Successfully!');
+      queryClient.invalidateQueries({
+        queryKey: ['cabins'],
+      });
+    },
+    onError: () => {
+      toast.error('Sorry! Could not add Cabin');
+    },
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
+    mutate(data);
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow label="Name" error={errors?.name?.message}>
         <Input
+          disabled={isCreating}
           type="text"
           id="name"
           {...register('name', {
@@ -32,6 +50,7 @@ function CreateCabinForm() {
 
       <FormRow label="Max Capacity" error={errors?.maxCapacity?.message}>
         <Input
+          disabled={isCreating}
           type="number"
           id="maxCapacity"
           {...register('maxCapacity', {
@@ -42,6 +61,7 @@ function CreateCabinForm() {
 
       <FormRow label="Regular Price" error={errors?.regularPrice?.message}>
         <Input
+          disabled={isCreating}
           type="number"
           id="regularPrice"
           {...register('regularPrice', {
@@ -52,6 +72,7 @@ function CreateCabinForm() {
 
       <FormRow label="discount" error={errors?.discount?.message}>
         <Input
+          disabled={isCreating}
           type="number"
           id="discount"
           {...register('discount')}
@@ -61,6 +82,7 @@ function CreateCabinForm() {
 
       <FormRow label="description" error={errors?.description?.message}>
         <Textarea
+          disabled={isCreating}
           type="number"
           id="description"
           defaultValue=""
@@ -73,10 +95,12 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow>
-        <Button variation="secondary" type="reset">
+        <Button disabled={isCreating} variation="secondary" type="reset">
           Cancel
         </Button>
-        <Button type="submit">Edit cabin</Button>
+        <Button disabled={isCreating} type="submit">
+          Edit cabin
+        </Button>
       </FormRow>
     </Form>
   );
