@@ -5,12 +5,12 @@ import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createEditCabin } from '../../services/apiCabins';
+
 import toast from 'react-hot-toast';
+import { useAddCabin } from './useAddCabin';
+import { useUpdateCabin } from './useUpdateCabin';
 
 function CreateCabinForm({ cabin = {} }) {
-  const queryClient = useQueryClient();
   const { _id: editId, ...editValues } = cabin;
   const isEditSession = Boolean(editId);
 
@@ -23,39 +23,25 @@ function CreateCabinForm({ cabin = {} }) {
     defaultValues: isEditSession ? editValues : {},
   });
 
-  const { mutate: addCabin, isLoading: isAdding } = useMutation({
-    mutationFn: (data) => createEditCabin(data),
-    onSuccess: () => {
-      toast.success('Cabin added successfully!');
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: () => {
-      toast.error('Sorry! Could not add Cabin');
-    },
-  });
-
-  const { mutate: updateCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ data, id }) => createEditCabin(data, id),
-    onSuccess: () => {
-      toast.success('Cabin updated successfully!');
-      queryClient.invalidateQueries({ queryKey: ['cabins'] });
-      reset();
-    },
-    onError: () => {
-      toast.error('Sorry! Could not update Cabin');
-    },
-  });
+  const { addCabin, isAdding } = useAddCabin();
+  const { updateCabin, isUpdating } = useUpdateCabin();
 
   const onSubmit = (data) => {
     if (isEditSession) {
-      updateCabin({ data, id: editId });
+      updateCabin(
+        { data, id: editId },
+        {
+          onSuccess: () => {
+            reset();
+          },
+        }
+      );
     } else {
       addCabin(data);
     }
   };
 
-  const isCreating = isEditing || isAdding;
+  const isCreating = isUpdating || isAdding;
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

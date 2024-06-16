@@ -37,7 +37,6 @@ export async function createEditCabin(data, id) {
       });
     }
     if (id) {
-      console.log('in the patch request', id);
       await fetch(`${URL}/cabins/${id}`, {
         method: 'PATCH',
         headers: {
