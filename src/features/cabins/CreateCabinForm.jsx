@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 import { useAddCabin } from './useAddCabin';
 import { useUpdateCabin } from './useUpdateCabin';
 
-function CreateCabinForm({ cabin = {} }) {
+function CreateCabinForm({ cabin = {}, onCloseModel }) {
   const { _id: editId, ...editValues } = cabin;
   const isEditSession = Boolean(editId);
 
@@ -33,11 +33,16 @@ function CreateCabinForm({ cabin = {} }) {
         {
           onSuccess: () => {
             reset();
+            onCloseModel?.();
           },
         }
       );
     } else {
-      addCabin(data);
+      addCabin(data, {
+        onSuccess: () => {
+          reset(), onCloseModel?.();
+        },
+      });
     }
   };
 
@@ -95,7 +100,12 @@ function CreateCabinForm({ cabin = {} }) {
       </FormRow>
 
       <FormRow>
-        <Button disabled={isCreating} variation="secondary" type="reset">
+        <Button
+          disabled={isCreating}
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModel?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isCreating} type="submit">

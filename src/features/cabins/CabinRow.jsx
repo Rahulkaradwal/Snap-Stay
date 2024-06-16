@@ -65,7 +65,7 @@ function CabinRow({ cabin }) {
         <Cabin>{name}</Cabin>
         <div>fits up to {maxCapacity} guests</div>
         <Price>{formatCurrency(regularPrice)}</Price>
-        <Discount>{discount}</Discount>
+        {discount ? <Discount>{discount}</Discount> : <span>&mdash;</span>}
         <div>
           <button onClick={() => setShowForm((s) => !s)} disabled={isDeleting}>
             Edit
