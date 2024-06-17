@@ -6,7 +6,6 @@ import FileInput from '../../ui/FileInput';
 import Textarea from '../../ui/Textarea';
 import FormRow from '../../ui/FormRow';
 
-import toast from 'react-hot-toast';
 import { useAddCabin } from './useAddCabin';
 import { useUpdateCabin } from './useUpdateCabin';
 
@@ -27,8 +26,12 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
   const { updateCabin, isUpdating } = useUpdateCabin();
 
   const onSubmit = (data) => {
+    console.log(data);
+    // const image = typeof data.image === 'string' ? data.image : data.image[0];
+
     if (isEditSession) {
       updateCabin(
+        // { newCabinData: { ...data, image }, id: editId },
         { data, id: editId },
         {
           onSuccess: () => {
@@ -38,18 +41,26 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
         }
       );
     } else {
-      addCabin(data, {
-        onSuccess: () => {
-          reset(), onCloseModel?.();
-        },
-      });
+      addCabin(
+        // { ...data, image },
+        // console.log(image)
+        data,
+        {
+          onSuccess: () => {
+            reset(), onCloseModel?.();
+          },
+        }
+      );
     }
   };
 
   const isCreating = isUpdating || isAdding;
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      type={onCloseModel ? 'modal' : 'regular'}
+    >
       <FormRow label="Name" error={errors?.name?.message}>
         <Input
           disabled={isCreating}
@@ -95,8 +106,14 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
         />
       </FormRow>
 
-      <FormRow label="Image" error={errors?.image?.message}>
-        <FileInput id="image" accept="image/*" />
+      <FormRow label="Cabin photo">
+        <FileInput
+          id="image"
+          accept="image/*"
+          // {...register('image', {
+          //   // required: isEditSession ? false : 'This field is required',
+          // })}
+        />
       </FormRow>
 
       <FormRow>

@@ -25,15 +25,16 @@ export async function deleteCabin(id) {
 // create a cabin request
 
 export async function createEditCabin(data, id) {
-  console.log('first id', id);
   try {
     if (!id) {
+      console.log('In the api', data);
       await fetch(`${URL}/cabins`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        // body: data,
       });
     }
     if (id) {
