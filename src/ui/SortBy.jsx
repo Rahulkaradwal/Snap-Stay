@@ -1,7 +1,7 @@
 import Select from './Select';
 
-function SortBy({ children }) {
-  return <Select>{children}</Select>;
+function SortBy({ sortField, options }) {
+  return {};
 }
 
 export default SortBy;

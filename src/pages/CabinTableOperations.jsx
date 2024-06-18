@@ -12,9 +12,22 @@ function CabinTableOperations() {
           { value: 'with-discount', option: 'With discount' },
         ]}
       />
-      {/* <SortBy>
-        <Select />
-      </SortBy> */}
+      <SortBy
+        sortField="sort"
+        options={[
+          { value: 'asce-AtoZ', label: 'Sort by Name (A-Z)' },
+          { value: 'desc-ZtoA', label: 'Sort by Name  (Z-A)' },
+          {
+            value: 'asc-regularPrice',
+            label: 'Sort by Regular Price  (low first)',
+          },
+          {
+            value: 'desc-regularPrice',
+            label: 'Sort by Regular Price  (high first)',
+          },
+          { value: 'desc-maxCapacity', label: 'Sort by Max Capacity' },
+        ]}
+      />
     </>
   );
 }
