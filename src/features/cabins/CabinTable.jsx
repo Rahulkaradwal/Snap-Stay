@@ -42,10 +42,12 @@ function CabinTable() {
   if (isLoading) return <Spinner />;
 
   // Get the discount filter parameter from URL
-  const discountVal = searchParams.get('discount') || '';
+
   let filteredCabins;
 
   // Filter cabins based on discount value
+  const discountVal = searchParams.get('discount') || '';
+
   if (discountVal === 'all') {
     filteredCabins = cabins;
   } else if (discountVal === 'no-discount') {
@@ -56,7 +58,31 @@ function CabinTable() {
     filteredCabins = cabins;
   }
 
-  if (!cabins) return <p> Sorry No Cabin Found</p>;
+  // sort cabins
+
+  const sortVal = searchParams.get('sortBy') || '';
+  const [field, direction] = sortVal.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
+
+  const sortCabins = filteredCabins.sort((a, b) => {
+    // Ensure field exists in both objects
+    if (!(field in a) || !(field in b)) return 0;
+
+    let fieldA = a[field];
+    let fieldB = b[field];
+
+    // Convert to numbers if necessary
+    if (!isNaN(fieldA) && !isNaN(fieldB)) {
+      fieldA = Number(fieldA);
+      fieldB = Number(fieldB);
+    }
+
+    if (fieldA < fieldB) return -1 * modifier;
+    if (fieldA > fieldB) return 1 * modifier;
+    return 0;
+  });
+
+  if (!sortCabins) return <p> Sorry! No Cabin Found</p>;
   return (
     <Table role="table">
       <TableHeader role="row">
@@ -67,7 +93,7 @@ function CabinTable() {
         <div>Discount</div>
         <div></div>
       </TableHeader>
-      {filteredCabins.map((cabin) => (
+      {sortCabins.map((cabin) => (
         <CabinRow cabin={cabin} key={cabin._id} />
       ))}
     </Table>
