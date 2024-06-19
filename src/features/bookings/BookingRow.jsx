@@ -1,17 +1,36 @@
-import styled from "styled-components";
-import { format, isToday } from "date-fns";
+import styled from 'styled-components';
+import { format, isToday } from 'date-fns';
 
-import Tag from "../../ui/Tag";
-import Table from "../../ui/Table";
+import Tag from '../../ui/Tag';
+// import Table from "../../ui/Table";
 
-import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
+import { formatCurrency } from '../../utils/helpers';
+import { formatDistanceFromNow } from '../../utils/helpers';
+
+const Table = styled.div`
+  border: 1px solid var(--color-grey-200);
+  font-size: 1.4rem;
+  background-color: var(--color-grey-0);
+  border-radius: 7px;
+  overflow: hidden;
+`;
+const TableRow = styled.div`
+  display: grid;
+  grid-template-columns: 0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem;
+  column-gap: 2.4rem;
+  align-items: center;
+  padding: 1.4rem 2.4rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-grey-100);
+  }
+`;
 
 const Cabin = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
-  font-family: "Sono";
+  font-family: 'Sono';
 `;
 
 const Stacked = styled.div`
@@ -30,13 +49,13 @@ const Stacked = styled.div`
 `;
 
 const Amount = styled.div`
-  font-family: "Sono";
+  font-family: 'Sono';
   font-weight: 500;
 `;
 
 function BookingRow({
   booking: {
-    id: bookingId,
+    _id: bookingId,
     created_at,
     startDate,
     endDate,
@@ -44,18 +63,18 @@ function BookingRow({
     numGuests,
     totalPrice,
     status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
+    guest: { fullName: guestName, email },
+    cabin: { name: cabinName },
   },
 }) {
   const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+    unconfirmed: 'blue',
+    'checked-in': 'green',
+    'checked-out': 'silver',
   };
 
   return (
-    <Table.Row>
+    <TableRow>
       <Cabin>{cabinName}</Cabin>
 
       <Stacked>
@@ -66,20 +85,21 @@ function BookingRow({
       <Stacked>
         <span>
           {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
+            ? 'Today'
+            : formatDistanceFromNow(startDate)}{' '}
           &rarr; {numNights} night stay
         </span>
         <span>
-          {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
-          {format(new Date(endDate), "MMM dd yyyy")}
+          {format(new Date(startDate), 'MMM dd yyyy')} &mdash;{' '}
+          {format(new Date(endDate), 'MMM dd yyyy')}
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
 
-      <Amount>{formatCurrency(totalPrice)}</Amount>
-    </Table.Row>
+      {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
+      <Amount>$115</Amount>
+    </TableRow>
   );
 }
 
