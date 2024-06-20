@@ -6,6 +6,7 @@ import Spinner from '../../ui/Spinner';
 import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '../../ui/Pagination';
+import useGetAllBooking from './useGetAllBooking';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -40,29 +41,20 @@ const Footer = styled.footer`
     display: none;
   }
 `;
+const NoData = styled.div`
+  margin: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: large;
+`;
 
 function BookingTable() {
-  const [searchParams] = useSearchParams();
-
-  const sortVal = searchParams.get('sortBy') || '';
-  const filterVal = searchParams.get('status') || '';
-  const pageVal = searchParams.get('page') || '';
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['bookings', sortVal, filterVal, pageVal],
-    queryFn: () => getAllBooking(sortVal, filterVal, pageVal),
-  });
-
+  const { data, isLoading } = useGetAllBooking();
   const bookings = data?.data || [];
   const count = data?.totalResult || 0;
 
-  // const { data: bookings, totalResult: count } = data;
-
   if (isLoading) return <Spinner />;
-
-  if (bookings.length === 0) {
-    return <p>Sorry! No Bookings Found</p>;
-  }
 
   return (
     <>
@@ -75,12 +67,18 @@ function BookingTable() {
           <div>Amount</div>
           <div></div>
         </TableHeader>
-        {bookings.map((booking) => (
-          <BookingRow key={booking._id} booking={booking} />
-        ))}
-        <Footer>
-          <Pagination count={count} />
-        </Footer>
+        <>
+          {bookings.length === 0 ? (
+            <NoData>Sorry! No Bookings Found</NoData>
+          ) : (
+            bookings.map((booking) => (
+              <BookingRow key={booking._id} booking={booking} />
+            ))
+          )}
+          <Footer>
+            <Pagination count={count} />
+          </Footer>
+        </>
       </Table>
     </>
   );
