@@ -3,6 +3,7 @@ import BookingRow from './BookingRow';
 import { useQuery } from '@tanstack/react-query';
 import { getAllBooking } from '../../services/apiBookings';
 import Spinner from '../../ui/Spinner';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -27,9 +28,14 @@ const TableHeader = styled.header`
 `;
 
 function BookingTable() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const sortVal = searchParams.get('sortBy') || '';
+  const filterVal = searchParams.get('status') || '';
+
   const { data: bookings, isLoading } = useQuery({
-    queryFn: getAllBooking,
-    queryKey: ['bookings'],
+    queryKey: ['bookings', sortVal, filterVal],
+    queryFn: () => getAllBooking(sortVal, filterVal),
   });
   console.log(bookings);
   if (isLoading) return <Spinner />;
