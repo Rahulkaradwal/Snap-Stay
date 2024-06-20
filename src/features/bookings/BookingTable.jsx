@@ -3,7 +3,9 @@ import BookingRow from './BookingRow';
 import { useQuery } from '@tanstack/react-query';
 import { getAllBooking } from '../../services/apiBookings';
 import Spinner from '../../ui/Spinner';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+
+import Pagination from '../../ui/Pagination';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -27,17 +29,35 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 
+const Footer = styled.footer`
+  background-color: var(--color-grey-50);
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem;
+
+  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
+  &:not(:has(*)) {
+    display: none;
+  }
+`;
+
 function BookingTable() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const sortVal = searchParams.get('sortBy') || '';
   const filterVal = searchParams.get('status') || '';
+  const pageVal = searchParams.get('page') || '';
 
-  const { data: bookings, isLoading } = useQuery({
-    queryKey: ['bookings', sortVal, filterVal],
-    queryFn: () => getAllBooking(sortVal, filterVal),
+  const { data, isLoading } = useQuery({
+    queryKey: ['bookings', sortVal, filterVal, pageVal],
+    queryFn: () => getAllBooking(sortVal, filterVal, pageVal),
   });
-  console.log(bookings);
+
+  const bookings = data?.data || [];
+  const count = data?.totalResult || 0;
+
+  // const { data: bookings, totalResult: count } = data;
+
   if (isLoading) return <Spinner />;
 
   if (bookings.length === 0) {
@@ -45,19 +65,24 @@ function BookingTable() {
   }
 
   return (
-    <Table>
-      <TableHeader role="row">
-        <div>Cabin</div>
-        <div>Guest</div>
-        <div>Dates</div>
-        <div>Status</div>
-        <div>Amount</div>
-        <div></div>
-      </TableHeader>
-      {bookings.map((booking) => (
-        <BookingRow key={booking._id} booking={booking} />
-      ))}
-    </Table>
+    <>
+      <Table>
+        <TableHeader role="row">
+          <div>Cabin</div>
+          <div>Guest</div>
+          <div>Dates</div>
+          <div>Status</div>
+          <div>Amount</div>
+          <div></div>
+        </TableHeader>
+        {bookings.map((booking) => (
+          <BookingRow key={booking._id} booking={booking} />
+        ))}
+        <Footer>
+          <Pagination count={count} />
+        </Footer>
+      </Table>
+    </>
   );
 }
 
