@@ -2,10 +2,13 @@ import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 
 import Tag from '../../ui/Tag';
+import { GrView } from 'react-icons/gr';
+
 // import Table from "../../ui/Table";
 
 import { formatCurrency } from '../../utils/helpers';
 import { formatDistanceFromNow } from '../../utils/helpers';
+import { useNavigate } from 'react-router-dom';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -47,6 +50,14 @@ const Stacked = styled.div`
     font-size: 1.2rem;
   }
 `;
+const Span = styled.span`
+  scale: 1.4;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    scale: 1.5;
+  }
+`;
 
 const Amount = styled.div`
   font-family: 'Sono';
@@ -74,6 +85,8 @@ function BookingRow({
     'checked-out': 'silver',
   };
 
+  const navigate = useNavigate();
+
   return (
     <TableRow>
       <Cabin>{cabinName}</Cabin>
@@ -100,6 +113,9 @@ function BookingRow({
 
       {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
       <Amount>$115</Amount>
+      <Span onClick={() => navigate(`/bookings/${bookingId}`)}>
+        <GrView />
+      </Span>
     </TableRow>
   );
 }

@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import BookingRow from './BookingRow';
-import { useQuery } from '@tanstack/react-query';
-import { getAllBooking } from '../../services/apiBookings';
 import Spinner from '../../ui/Spinner';
-import { useSearchParams } from 'react-router-dom';
 
 import Pagination from '../../ui/Pagination';
 import useGetAllBooking from './useGetAllBooking';

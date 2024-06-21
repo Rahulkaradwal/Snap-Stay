@@ -11,6 +11,7 @@ import Cabins from './pages/Cabins';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Settings from './pages/Settings';
+import Booking from './pages/Booking';
 import Users from './pages/Users';
 import Account from './pages/Account';
 import AppLayout from './ui/AppLayout';
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: '/bookings',
         element: <Bookings />,
+      },
+      {
+        path: '/bookings/:bookingId',
+        element: <Booking />,
       },
       {
         path: '/account',
