@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 function useCheckin() {
+  const queryKeys = ['bookings', 'bookingId'];
   const queryClient = useQueryClient();
   const { bookingId } = useParams();
   console.log('in the func');
@@ -11,7 +12,9 @@ function useCheckin() {
     mutationFn: () => checkInBooking(bookingId, { status: 'checked-in' }),
     onSuccess: () => {
       toast.success('Checked In');
-      queryClient.invalidateQueries({ queryKey: ['bookingId'] });
+      queryKeys.forEach((key) => {
+        queryClient.invalidateQueries(key);
+      });
     },
   });
   return { checkIn, isLoading };
