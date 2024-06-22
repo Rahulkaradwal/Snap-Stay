@@ -19,3 +19,18 @@ export async function getBooking(bookingId) {
   const data = await res.json();
   return data;
 }
+
+export async function checkInBooking(bookingId, formdata) {
+  const res = await fetch(`${URL}/bookings/getBooking/${bookingId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formdata),
+  });
+  if (!res.ok) {
+    throw new Error('Booking cound not be loaded');
+  }
+  const data = await res.json();
+  return data;
+}
