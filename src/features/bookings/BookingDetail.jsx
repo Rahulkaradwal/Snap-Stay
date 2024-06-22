@@ -4,14 +4,13 @@ import BookingDataBox from './BookingDataBox';
 import Row from '../../ui/Row';
 import Heading from '../../ui/Heading';
 import Tag from '../../ui/Tag';
-import ButtonGroup from '../../ui/ButtonGroup';
-import Button from '../../ui/Button';
+
 import ButtonText from '../../ui/ButtonText';
 
 import { useMoveBack } from '../../hooks/useMoveBack';
 import useBooking from './useBooking';
 import Spinner from '../../ui/Spinner';
-import useCheckin from './useCheckin';
+import CheckingBooking from './CheckingBooking';
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -20,24 +19,23 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
+  // custom hooks
+  const moveBack = useMoveBack();
+
   const { data, isLoading } = useBooking();
   const booking = data.data;
-  const { checkIn, isLoading: isCheckingIn } = useCheckin();
-  const moveBack = useMoveBack();
+
+  // conditinal ui
   const statusToTagName = {
     unconfirmed: 'blue',
     'checked-in': 'green',
     'checked-out': 'silver',
   };
 
-  const handleCheckIn = () => {
-    checkIn();
-  };
-
+  // component returns
   if (isLoading) return <Spinner />;
   if (!booking) return <p>Sorry! No Booking Found</p>;
-  console.log(booking);
-  console.log('status', booking.status === 'checked-in');
+
   return (
     <>
       <Row type="horizontal">
@@ -52,17 +50,7 @@ function BookingDetail() {
 
       <BookingDataBox booking={booking} />
 
-      <ButtonGroup>
-        {booking.status != 'checked-in' && (
-          <Button onClick={handleCheckIn}>
-            Check in booking #{booking.cabin.name}
-          </Button>
-        )}
-
-        <Button $variation="secondary" onClick={moveBack}>
-          Back
-        </Button>
-      </ButtonGroup>
+      <CheckingBooking booking={booking} />
     </>
   );
 }

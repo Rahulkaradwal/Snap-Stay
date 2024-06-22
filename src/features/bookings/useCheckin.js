@@ -7,9 +7,9 @@ function useCheckin() {
   const queryKeys = ['bookings', 'bookingId'];
   const queryClient = useQueryClient();
   const { bookingId } = useParams();
-  console.log('in the func');
   const { mutate: checkIn, isLoading } = useMutation({
-    mutationFn: () => checkInBooking(bookingId, { status: 'checked-in' }),
+    mutationFn: () =>
+      checkInBooking(bookingId, { status: 'checked-in', isPaid: true }),
     onSuccess: () => {
       toast.success('Checked In');
       queryKeys.forEach((key) => {
