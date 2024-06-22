@@ -119,7 +119,7 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
       <FormRow>
         <Button
           disabled={isCreating}
-          variation="secondary"
+          $variation="secondary"
           type="reset"
           onClick={() => onCloseModel?.()}
         >
