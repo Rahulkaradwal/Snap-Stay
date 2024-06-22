@@ -20,7 +20,7 @@ export async function getBooking(bookingId) {
   return data;
 }
 
-export async function checkInBooking(bookingId, formdata) {
+export async function updateBookingStatus(bookingId, formdata) {
   const res = await fetch(`${URL}/bookings/getBooking/${bookingId}`, {
     method: 'PATCH',
     headers: {

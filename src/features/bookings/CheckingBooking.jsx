@@ -5,6 +5,8 @@ import ButtonGroup from '../../ui/ButtonGroup';
 import { useMoveBack } from '../../hooks/useMoveBack';
 import Checkbox from '../../ui/Checkbox';
 import { useEffect, useState } from 'react';
+import useCheckOut from './useCheckOut';
+import { useNavigate } from 'react-router-dom';
 
 const Box = styled.div`
   background-color: var(--color-grey-0);
@@ -16,7 +18,8 @@ const Box = styled.div`
 function CheckingBooking({ booking }) {
   //custom hooks
   const moveBack = useMoveBack();
-  const { checkIn, isLoading: isCheckingIn } = useCheckin();
+  const { checkIn } = useCheckin();
+  const { checkOut, isCheckingOut } = useCheckOut();
 
   const [confirmPaid, setConfirmPaid] = useState(false);
 
@@ -28,29 +31,34 @@ function CheckingBooking({ booking }) {
   };
 
   const handleCheckOut = () => {
-    console.log('checkout');
+    checkOut();
   };
   return (
     <>
       {booking.status !== 'checked-in' && (
         <>
-          <Box>
-            <Checkbox
-              checked={confirmPaid}
-              disabled={confirmPaid}
-              onChange={() => setConfirmPaid((confirm) => !confirm)}
-              id="confirm"
-            >
-              I confirm that {booking.guest.fullName} has paid the total amount
-            </Checkbox>
-          </Box>
+          {booking.status !== 'checked-out' && (
+            <Box>
+              <Checkbox
+                checked={confirmPaid}
+                disabled={confirmPaid}
+                onChange={() => setConfirmPaid((confirm) => !confirm)}
+                id="confirm"
+              >
+                I confirm that {booking.guest.fullName} has paid the total
+                amount
+              </Checkbox>
+            </Box>
+          )}
           <ButtonGroup>
-            <Button
-              onClick={handleCheckIn}
-              disabled={!confirmPaid || booking.status === 'checked-in'}
-            >
-              {`Check in booking #${booking.cabin.name}`}
-            </Button>
+            {booking.status !== 'checked-out' && (
+              <Button
+                onClick={handleCheckIn}
+                disabled={!confirmPaid || booking.status === 'checked-in'}
+              >
+                {`Check in booking #${booking.cabin.name}`}
+              </Button>
+            )}
             <Button $variation="secondary" onClick={moveBack}>
               Back
             </Button>
@@ -59,7 +67,11 @@ function CheckingBooking({ booking }) {
       )}
       {booking.status === 'checked-in' && (
         <ButtonGroup>
-          <Button $variation="danger" onClick={handleCheckOut}>
+          <Button
+            $variation="danger"
+            onClick={handleCheckOut}
+            disabled={isCheckingOut}
+          >
             {`Check-Out booking #${booking.cabin.name}`}
           </Button>
           <Button $variation="secondary" onClick={moveBack}>

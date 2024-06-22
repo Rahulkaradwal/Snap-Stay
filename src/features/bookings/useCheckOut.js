@@ -3,20 +3,20 @@ import { updateBookingStatus } from '../../services/apiBookings';
 import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
-function useCheckin() {
+function useCheckOut() {
   const queryKeys = ['bookings', 'bookingId'];
   const queryClient = useQueryClient();
   const { bookingId } = useParams();
-  const { mutate: checkIn, isLoading } = useMutation({
+  const { mutate: checkOut, isLoading: isCheckingOut } = useMutation({
     mutationFn: () =>
-      updateBookingStatus(bookingId, { status: 'checked-in', isPaid: true }),
+      updateBookingStatus(bookingId, { status: 'checked-out', isPaid: true }),
     onSuccess: () => {
-      toast.success('Checked In');
+      toast.success('Checked Out');
       queryKeys.forEach((key) => {
         queryClient.invalidateQueries(key);
       });
     },
   });
-  return { checkIn, isLoading };
+  return { checkOut, isCheckingOut };
 }
-export default useCheckin;
+export default useCheckOut;
