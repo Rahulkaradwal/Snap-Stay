@@ -26,31 +26,47 @@ function CheckingBooking({ booking }) {
   const handleCheckIn = () => {
     checkIn();
   };
+
+  const handleCheckOut = () => {
+    console.log('checkout');
+  };
   return (
     <>
-      <Box>
-        <Checkbox
-          checked={confirmPaid}
-          disabled={confirmPaid}
-          onChange={() => setConfirmPaid((confirm) => !confirm)}
-          id="confirm"
-        >
-          I confirm that {booking.guest.fullName} has paid the total amount
-        </Checkbox>
-      </Box>
-      <ButtonGroup>
-        <Button
-          onClick={handleCheckIn}
-          disabled={!confirmPaid || booking.status === 'checked-in'}
-        >
-          {booking.status === 'checked-in'
-            ? 'Check-out'
-            : `Check in booking #${booking.cabin.name}`}
-        </Button>
-        <Button $variation="secondary" onClick={moveBack}>
-          Back
-        </Button>
-      </ButtonGroup>
+      {booking.status !== 'checked-in' && (
+        <>
+          <Box>
+            <Checkbox
+              checked={confirmPaid}
+              disabled={confirmPaid}
+              onChange={() => setConfirmPaid((confirm) => !confirm)}
+              id="confirm"
+            >
+              I confirm that {booking.guest.fullName} has paid the total amount
+            </Checkbox>
+          </Box>
+          <ButtonGroup>
+            <Button
+              onClick={handleCheckIn}
+              disabled={!confirmPaid || booking.status === 'checked-in'}
+            >
+              {`Check in booking #${booking.cabin.name}`}
+            </Button>
+            <Button $variation="secondary" onClick={moveBack}>
+              Back
+            </Button>
+          </ButtonGroup>
+        </>
+      )}
+      {booking.status === 'checked-in' && (
+        <ButtonGroup>
+          <Button $variation="danger" onClick={handleCheckOut}>
+            {`Check-Out booking #${booking.cabin.name}`}
+          </Button>
+          <Button $variation="secondary" onClick={moveBack}>
+            Back
+          </Button>
+        </ButtonGroup>
+      )}
     </>
   );
 }
