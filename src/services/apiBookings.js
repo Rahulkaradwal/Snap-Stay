@@ -1,4 +1,5 @@
 import URL from './URL';
+import { getToday } from '../utils/helpers';
 
 export async function getAllBooking(sort, filter, page) {
   const res = await fetch(
@@ -43,4 +44,17 @@ export async function deleteBooking(id) {
   } catch (err) {
     throw new Error('Could not deleted');
   }
+}
+
+export async function getRecentBookings(lastDate) {
+  const todayDate = getToday({ end: true });
+
+  const res = await fetch(
+    `${URL}/bookings/getLatestBooking?lastDate=${lastDate}&todayDate=${todayDate}`
+  );
+  if (!res.ok) {
+    throw new Error('Bookings cound not be loaded');
+  }
+  const data = await res.json();
+  return data;
 }
