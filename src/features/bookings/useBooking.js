@@ -8,7 +8,6 @@ function useBooking() {
     queryKey: ['bookingId', bookingId],
     queryFn: () => getBooking(bookingId),
   });
-  console.log(data);
   return { data, isLoading };
 }
 export default useBooking;

@@ -41,7 +41,6 @@ export async function deleteBooking(id) {
       method: 'DELETE',
     });
   } catch (err) {
-    console.log(err);
     throw new Error('Could not deleted');
   }
 }

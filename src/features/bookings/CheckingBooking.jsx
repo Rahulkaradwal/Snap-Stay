@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 import useCheckOut from './useCheckOut';
 import useDeleteBooking from './useDeleteBooking';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 const Box = styled.div`
   background-color: var(--color-grey-0);
@@ -63,9 +65,17 @@ function CheckingBooking({ booking }) {
           )}
           <ButtonGroup>
             {booking.status === 'checked-out' ? (
-              <Button $variation="danger" onClick={handleDeleteBooking}>
-                Delete Booking
-              </Button>
+              <Modal>
+                <Modal.Open>
+                  <Button $variation="danger">Delete Booking</Button>
+                </Modal.Open>
+                <Modal.Window>
+                  <ConfirmDelete
+                    resourceName="booking"
+                    onConfirm={handleDeleteBooking}
+                  />
+                </Modal.Window>
+              </Modal>
             ) : (
               <Button
                 onClick={handleCheckIn}

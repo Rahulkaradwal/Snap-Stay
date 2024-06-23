@@ -11,6 +11,8 @@ import { formatDistanceFromNow } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import useDeleteBooking from './useDeleteBooking';
+import Modal from '../../ui/Modal';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -131,9 +133,19 @@ function BookingRow({
         <span onClick={() => navigate(`/bookings/${bookingId}`)}>
           <GrView />
         </span>
-        <span disabled={isDeleting} onClick={() => deleteBooking(bookingId)}>
-          <RiDeleteBin6Line />
-        </span>
+        <Modal>
+          <Modal.Open modalName="deleteBooking">
+            <button>
+              <RiDeleteBin6Line />
+            </button>
+          </Modal.Open>
+          <Modal.Window windowName="deleteBooking">
+            <ConfirmDelete
+              resourceName={cabinName}
+              onConfirm={() => deleteBooking(bookingId)}
+            />
+          </Modal.Window>
+        </Modal>
       </ButtonIcon>
     </TableRow>
   );
