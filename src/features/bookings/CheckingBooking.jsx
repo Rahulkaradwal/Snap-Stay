@@ -6,6 +6,7 @@ import { useMoveBack } from '../../hooks/useMoveBack';
 import Checkbox from '../../ui/Checkbox';
 import { useEffect, useState } from 'react';
 import useCheckOut from './useCheckOut';
+import useDeleteBooking from './useDeleteBooking';
 import { useNavigate } from 'react-router-dom';
 
 const Box = styled.div`
@@ -16,10 +17,14 @@ const Box = styled.div`
 `;
 
 function CheckingBooking({ booking }) {
+  // hooks
+  const navigate = useNavigate();
+
   //custom hooks
   const moveBack = useMoveBack();
   const { checkIn } = useCheckin();
   const { checkOut, isCheckingOut } = useCheckOut();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const [confirmPaid, setConfirmPaid] = useState(false);
 
@@ -33,6 +38,12 @@ function CheckingBooking({ booking }) {
   const handleCheckOut = () => {
     checkOut();
   };
+
+  const handleDeleteBooking = () => {
+    deleteBooking();
+    navigate('/bookings');
+  };
+
   return (
     <>
       {booking.status !== 'checked-in' && (
@@ -51,7 +62,11 @@ function CheckingBooking({ booking }) {
             </Box>
           )}
           <ButtonGroup>
-            {booking.status !== 'checked-out' && (
+            {booking.status === 'checked-out' ? (
+              <Button $variation="danger" onClick={handleDeleteBooking}>
+                Delete Booking
+              </Button>
+            ) : (
               <Button
                 onClick={handleCheckIn}
                 disabled={!confirmPaid || booking.status === 'checked-in'}
@@ -68,7 +83,7 @@ function CheckingBooking({ booking }) {
       {booking.status === 'checked-in' && (
         <ButtonGroup>
           <Button
-            $variation="danger"
+            $variation="primary"
             onClick={handleCheckOut}
             disabled={isCheckingOut}
           >

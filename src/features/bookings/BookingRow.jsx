@@ -9,6 +9,8 @@ import { GrView } from 'react-icons/gr';
 import { formatCurrency } from '../../utils/helpers';
 import { formatDistanceFromNow } from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
+import { RiDeleteBin6Line } from 'react-icons/ri';
+import useDeleteBooking from './useDeleteBooking';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -19,7 +21,7 @@ const Table = styled.div`
 `;
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem;
+  grid-template-columns: 0.6fr 2fr 2.4fr 1.4fr 0.7fr 7rem;
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
@@ -50,12 +52,19 @@ const Stacked = styled.div`
     font-size: 1.2rem;
   }
 `;
-const Span = styled.span`
-  scale: 1.4;
+const ButtonIcon = styled.div`
   cursor: pointer;
-  transition: all 0.3s;
-  &:hover {
-    scale: 1.5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  & span:first-child {
+    font-size: 1.8rem;
+  }
+
+  & span:last-child {
+    font-size: 1.8rem;
   }
 `;
 
@@ -86,6 +95,11 @@ function BookingRow({
   };
 
   const navigate = useNavigate();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
+
+  // const handleDeleteBooking = (bookingId) => {
+  //   deleteBooking(bookingId);
+  // };
 
   return (
     <TableRow>
@@ -113,9 +127,14 @@ function BookingRow({
 
       {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
       <Amount>$115</Amount>
-      <Span onClick={() => navigate(`/bookings/${bookingId}`)}>
-        <GrView />
-      </Span>
+      <ButtonIcon>
+        <span onClick={() => navigate(`/bookings/${bookingId}`)}>
+          <GrView />
+        </span>
+        <span disabled={isDeleting} onClick={() => deleteBooking(bookingId)}>
+          <RiDeleteBin6Line />
+        </span>
+      </ButtonIcon>
     </TableRow>
   );
 }

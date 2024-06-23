@@ -34,3 +34,14 @@ export async function updateBookingStatus(bookingId, formdata) {
   const data = await res.json();
   return data;
 }
+
+export async function deleteBooking(id) {
+  try {
+    await fetch(`${URL}/bookings/getBooking/${id}`, {
+      method: 'DELETE',
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error('Could not deleted');
+  }
+}
