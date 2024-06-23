@@ -26,7 +26,7 @@ function CheckingBooking({ booking }) {
   const moveBack = useMoveBack();
   const { checkIn } = useCheckin();
   const { checkOut, isCheckingOut } = useCheckOut();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteBooking } = useDeleteBooking();
 
   const [confirmPaid, setConfirmPaid] = useState(false);
 
@@ -71,7 +71,7 @@ function CheckingBooking({ booking }) {
                 </Modal.Open>
                 <Modal.Window>
                   <ConfirmDelete
-                    resourceName="booking"
+                    resourceName={booking.cabin.name}
                     onConfirm={handleDeleteBooking}
                   />
                 </Modal.Window>

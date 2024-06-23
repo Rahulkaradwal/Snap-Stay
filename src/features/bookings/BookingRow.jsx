@@ -78,14 +78,10 @@ const Amount = styled.div`
 function BookingRow({
   booking: {
     _id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
-    totalPrice,
     status,
-    // guest: { fullName: guestName, email },
     guest,
     cabin: { name: cabinName },
   },
@@ -97,7 +93,7 @@ function BookingRow({
   };
 
   const navigate = useNavigate();
-  const { deleteBooking, isDeleting } = useDeleteBooking();
+  const { deleteBooking } = useDeleteBooking();
 
   // const handleDeleteBooking = (bookingId) => {
   //   deleteBooking(bookingId);
@@ -130,14 +126,14 @@ function BookingRow({
       {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
       <Amount>$115</Amount>
       <ButtonIcon>
-        <span onClick={() => navigate(`/bookings/${bookingId}`)}>
+        <ButtonIcon onClick={() => navigate(`/bookings/${bookingId}`)}>
           <GrView />
-        </span>
+        </ButtonIcon>
         <Modal>
           <Modal.Open modalName="deleteBooking">
-            <button>
+            <ButtonIcon>
               <RiDeleteBin6Line />
-            </button>
+            </ButtonIcon>
           </Modal.Open>
           <Modal.Window windowName="deleteBooking">
             <ConfirmDelete
