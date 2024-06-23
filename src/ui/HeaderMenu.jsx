@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ButtonIcon from './ButtonIcon';
 import { IoIosLogOut } from 'react-icons/io';
 import { HiOutlineUser } from 'react-icons/hi2';
+import DarkModeToggle from './DarkModeToggle';
 const StyledHeaderMenu = styled.ul`
   display: flex;
   gap: 0.4rem;
@@ -20,6 +21,9 @@ function HeaderMenu() {
         <ButtonIcon>
           <IoIosLogOut />
         </ButtonIcon>
+      </li>
+      <li>
+        <DarkModeToggle />
       </li>
     </StyledHeaderMenu>
   );

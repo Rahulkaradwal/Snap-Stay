@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import useDeleteBooking from './useDeleteBooking';
 import Modal from '../../ui/Modal';
+import ActionButtonIcon from '../../ui/ActionButtonIcon';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 
 const Table = styled.div`
@@ -126,14 +127,14 @@ function BookingRow({
       {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
       <Amount>$115</Amount>
       <ButtonIcon>
-        <ButtonIcon onClick={() => navigate(`/bookings/${bookingId}`)}>
+        <ActionButtonIcon onClick={() => navigate(`/bookings/${bookingId}`)}>
           <GrView />
-        </ButtonIcon>
+        </ActionButtonIcon>
         <Modal>
           <Modal.Open modalName="deleteBooking">
-            <ButtonIcon>
+            <ActionButtonIcon>
               <RiDeleteBin6Line />
-            </ButtonIcon>
+            </ActionButtonIcon>
           </Modal.Open>
           <Modal.Window windowName="deleteBooking">
             <ConfirmDelete
