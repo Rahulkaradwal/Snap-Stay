@@ -42,6 +42,8 @@ const GlobalStyle = createGlobalStyle`
 
   --image-grayscale: 0;
   --image-opacity: 100%;
+
+  --linechart-stroke : #dee1e386
   }
   &.dark-mode{
 
@@ -80,6 +82,8 @@ const GlobalStyle = createGlobalStyle`
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
+
+--linechart-stroke: #4b4d4e87
 
 }
 
