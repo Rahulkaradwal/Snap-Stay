@@ -58,3 +58,15 @@ export async function getRecentBookings(lastDate) {
   const data = await res.json();
   return data;
 }
+
+export async function getTodaysBooking() {
+  const startDate = getToday();
+  const res = await fetch(
+    `${URL}/bookings/getTodaysBooking?today=${startDate}`
+  );
+  if (!res.ok) {
+    throw new Error('Bookings cound not be loaded');
+  }
+  const data = await res.json();
+  return data;
+}

@@ -6,7 +6,6 @@ import { formatCurrency } from '../../utils/helpers';
 function Stats({ bookings = [], confirmedStays = [] }) {
   const numBookings = bookings.length;
   //   const sales = bookings.reduce((acc, curr)=> acc+curr.totalPrice, 0);
-  console.log('confirmed stays', confirmedStays);
 
   const sales = 11484;
   const checkins = confirmedStays.length;
