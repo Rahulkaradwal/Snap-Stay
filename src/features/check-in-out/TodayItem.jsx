@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../../ui/Button';
 import Tag from '../../ui/Tag';
 import CheckoutButton from './CheckoutButton';
+import useCheckin from '../bookings/useCheckin';
 
 const StyledTodayItem = styled.li`
   display: grid;
@@ -25,8 +26,8 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activity }) {
+  const { checkIn, isLoading: isCheckingIn } = useCheckin();
   const { _id: id, status, guest, numNights = 0 } = activity;
-  console.log(status);
   return (
     <StyledTodayItem>
       {status === 'unconfirmed' && <Tag type="green">Arriving</Tag>}
@@ -38,7 +39,7 @@ function TodayItem({ activity }) {
           $variation="primary"
           $size="small"
           as={Link}
-          to={`/checkin/${id}`}
+          onClick={() => checkIn({ id })}
         >
           Check in
         </Button>
