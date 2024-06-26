@@ -1,11 +1,17 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import useTokenInterceptor from '../features/authentication/useTokenInterceptor';
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [authToken, setAuthToken] = useState(localStorage.get('authToken'));
-
+  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
   const [isAuthenticated, setIsAuthenticated] = useState(!!authToken);
+
+  useEffect(() => {
+    setIsAuthenticated(!!authToken);
+  }, [authToken]);
+
+  // useTokenInterceptor();
 
   useEffect(() => {
     setIsAuthenticated(!!authToken);
@@ -29,7 +35,7 @@ function AuthProvider({ children }) {
 function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('AuthContext was used outside of the scope');
+    throw new Error('AuthContext must be used within an AuthProvider');
   }
   return context;
 }

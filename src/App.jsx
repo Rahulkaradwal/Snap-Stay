@@ -25,6 +25,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { DarkModeProvider } from './context/DarkModeContext';
 import ProtectedRoute from './ui/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -88,30 +89,32 @@ function App() {
     },
   });
   return (
-    <DarkModeProvider>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <GlobalStyles />
-        <RouterProvider router={router} />
-        <Toaster
-          position="top-center"
-          reverseOrder={true}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: { duration: 5000 },
-            style: {
-              fontSize: '16px',
-              maxWidth: '500px',
-              padding: '16px 24px',
-              background: 'var(---color-grey-0)',
-              color: 'var(--color-grey-700)',
-            },
-          }}
-        />
-      </QueryClientProvider>
-    </DarkModeProvider>
+    <AuthProvider>
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <GlobalStyles />
+          <RouterProvider router={router} />
+          <Toaster
+            position="top-center"
+            reverseOrder={true}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: { duration: 5000 },
+              style: {
+                fontSize: '16px',
+                maxWidth: '500px',
+                padding: '16px 24px',
+                background: 'var(---color-grey-0)',
+                color: 'var(--color-grey-700)',
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </DarkModeProvider>
+    </AuthProvider>
   );
 }
 
