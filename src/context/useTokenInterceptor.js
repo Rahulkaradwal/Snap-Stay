@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from './AuthContext';
 
 const useTokenInterceptor = () => {
-  const { authToken, logout, setAuthToken } = useAuth();
+  const { authToken, logout } = useAuth();
 
   useEffect(() => {
     const checkTokenExpiration = () => {
@@ -16,7 +16,7 @@ const useTokenInterceptor = () => {
       }
     };
 
-    const interval = setInterval(checkTokenExpiration, 60000 * 30); // check every minute
+    const interval = setInterval(checkTokenExpiration, 60000); // Check every minute
 
     return () => clearInterval(interval);
   }, [authToken, logout]);

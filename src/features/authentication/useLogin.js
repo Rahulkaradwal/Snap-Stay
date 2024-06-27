@@ -1,13 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
-import { login } from '../../services/apiAuth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../services/apiAuth';
+import { useAuth } from '../../context/AuthContext';
 
 function useLogin() {
   const navigate = useNavigate();
+  const { loginContext } = useAuth();
+
   const { mutate: userLogin, isLoading } = useMutation({
     mutationFn: (userData) => login(userData),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      loginContext(data.token);
+
       navigate('/dashboard');
     },
     onError: (err) => {

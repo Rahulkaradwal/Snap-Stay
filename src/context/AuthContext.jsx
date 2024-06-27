@@ -1,17 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import useTokenInterceptor from '../features/authentication/useTokenInterceptor';
+import useTokenInterceptor from './useTokenInterceptor';
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
+  console.log('in the context', authToken);
   const [isAuthenticated, setIsAuthenticated] = useState(!!authToken);
-
-  useEffect(() => {
-    setIsAuthenticated(!!authToken);
-  }, [authToken]);
-
-  // useTokenInterceptor();
 
   useEffect(() => {
     setIsAuthenticated(!!authToken);
@@ -23,9 +18,15 @@ function AuthProvider({ children }) {
     setIsAuthenticated(false);
   };
 
+  const loginContext = (token) => {
+    setAuthToken(token);
+    localStorage.setItem('authToken', token);
+    setIsAuthenticated(true);
+  };
+
   return (
     <AuthContext.Provider
-      value={{ authToken, isAuthenticated, setAuthToken, logout }}
+      value={{ authToken, isAuthenticated, setAuthToken, logout, loginContext }}
     >
       {children}
     </AuthContext.Provider>
