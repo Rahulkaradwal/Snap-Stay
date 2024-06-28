@@ -6,10 +6,11 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import { HiPencil } from 'react-icons/hi2';
 import { GiSightDisabled } from 'react-icons/gi';
+import { format } from 'date-fns';
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 1.4fr 1fr;
+  grid-template-columns: 2fr 2fr 1.4fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
@@ -69,13 +70,14 @@ const ButtonIcon = styled.div`
   }
 `;
 
-function UserRow() {
+function UserRow({ user }) {
+  const { active: status, createdAt: joinedDate, email, fullName } = user;
   return (
     <TableRow>
-      <Name>Rahul Karadwal</Name>
-      <Email>Rahulkaradwal@gmail.com</Email>
-      <Joined>26 January</Joined>
-      <Status>Active</Status>
+      <Name>{fullName}</Name>
+      <Email>{email}</Email>
+      <Joined>{format(new Date(joinedDate), 'MMM dd yyyy')}</Joined>
+      <Status>{status ? 'Active' : 'De-active'}</Status>
       <ButtonIcon>
         <ActionButtonIcon onClick={() => console.log('button Cliced')}>
           {/* <GrView /> */}

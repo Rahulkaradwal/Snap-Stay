@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import UserRow from './UserRow';
+import useAllUser from './useAllUser';
+import Spinner from '../../ui/Spinner';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -11,7 +13,7 @@ const Table = styled.div`
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr 1.4fr 1fr;
+  grid-template-columns: 2fr 2fr 1.4fr 1fr 1fr;
   column-gap: 2.4rem;
   align-items: center;
   background-color: var(--color-grey-50);
@@ -23,17 +25,6 @@ const TableHeader = styled.header`
   padding: 1.6rem 2.4rem;
 `;
 
-const Footer = styled.footer`
-  background-color: var(--color-grey-50);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
-
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
-  &:not(:has(*)) {
-    display: none;
-  }
-`;
 const NoData = styled.div`
   margin: 5rem;
   display: flex;
@@ -43,6 +34,15 @@ const NoData = styled.div`
 `;
 
 function UserTable() {
+  const { data, isLoading } = useAllUser();
+  const users = data.data;
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (!users) return <NoData>Sorry! Users not found</NoData>;
+  console.log(users);
   return (
     <>
       <Table>
@@ -54,7 +54,9 @@ function UserTable() {
           <div>Action</div>
           <div></div>
         </TableHeader>
-        <UserRow />
+        {users.map((user) => (
+          <UserRow key={user._id} user={user} />
+        ))}
       </Table>
     </>
   );
