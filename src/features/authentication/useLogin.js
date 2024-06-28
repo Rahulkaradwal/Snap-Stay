@@ -12,6 +12,9 @@ function useLogin() {
     mutationFn: (userData) => login(userData),
     onSuccess: (data) => {
       loginContext(data.token);
+      const tokenExpireTime = new Date();
+      tokenExpireTime.setHours(tokenExpireTime.getHours() + 1);
+      localStorage.setItem('tokenExpireTime', tokenExpireTime.toISOString());
 
       navigate('/dashboard');
     },

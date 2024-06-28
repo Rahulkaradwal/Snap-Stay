@@ -96,7 +96,6 @@ function App() {
           <ReactQueryDevtools initialIsOpen={false} />
           <GlobalStyles />
           <RouterProvider router={router} />
-          <TokenInterceptorWrapper />
 
           <Toaster
             position="top-center"
@@ -119,11 +118,6 @@ function App() {
       </DarkModeProvider>
     </AuthProvider>
   );
-}
-
-function TokenInterceptorWrapper() {
-  useTokenInterceptor();
-  return null;
 }
 
 export default App;

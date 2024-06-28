@@ -1,11 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import useTokenInterceptor from './useTokenInterceptor';
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
-  console.log('in the context', authToken);
   const [isAuthenticated, setIsAuthenticated] = useState(!!authToken);
 
   useEffect(() => {
@@ -24,9 +22,24 @@ function AuthProvider({ children }) {
     setIsAuthenticated(true);
   };
 
+  const checkAuth = () => {
+    const storedExpirationDate = localStorage.getItem('tokenExpireTime');
+    const expirationDate = new Date(storedExpirationDate);
+    const now = new Date();
+    const duration = expirationDate.getTime() - now.getTime();
+    return duration;
+  };
+
   return (
     <AuthContext.Provider
-      value={{ authToken, isAuthenticated, setAuthToken, logout, loginContext }}
+      value={{
+        authToken,
+        isAuthenticated,
+        setAuthToken,
+        logout,
+        loginContext,
+        checkAuth,
+      }}
     >
       {children}
     </AuthContext.Provider>
