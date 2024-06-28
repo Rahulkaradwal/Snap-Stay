@@ -15,13 +15,6 @@ import Modal from '../../ui/Modal';
 import ActionButtonIcon from '../../ui/ActionButtonIcon';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 
-const Table = styled.div`
-  border: 1px solid var(--color-grey-200);
-  font-size: 1.4rem;
-  background-color: var(--color-grey-0);
-  border-radius: 7px;
-  overflow: hidden;
-`;
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 2fr 2.4fr 1.4fr 0.7fr 7rem;
