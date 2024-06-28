@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getAllUsers } from '../../services/apiUser';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 function useAllUser() {
   const [searchParams] = useSearchParams();
