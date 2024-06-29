@@ -5,7 +5,7 @@ function useDelete() {
   const queryClient = useQueryClient();
 
   const { mutate: deleteUser, isLoading } = useMutation({
-    mutationFn: ({ id }) => deleteUserApi(id),
+    mutationFn: async (id) => deleteUserApi(id),
     onSuccess: () => {
       toast.success('User Deleted Successfully!');
       queryClient.invalidateQueries({

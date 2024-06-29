@@ -9,6 +9,7 @@ function useSignup() {
   const { mutate: userSignup, isLoading } = useMutation({
     mutationFn: (userData) => SignUp(userData),
     onSuccess: () => {
+      toast.success('Account Created Successfully!');
       navigate('/dashboard');
     },
     onError: (err) => {

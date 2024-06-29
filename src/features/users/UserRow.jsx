@@ -83,15 +83,12 @@ function UserRow({ user }) {
   } = user;
 
   const { updateStatus, isLoading } = useUpdateStatus();
-  const { deleteUser, isLoading: isDeleting } = useDelete();
+  const { deleteUser } = useDelete();
   const handleUserStatusUpdate = () => {
     const data = { active: !status };
     updateStatus({ data, id });
   };
 
-  const handleDeleteUser = () => {
-    deleteUser({ id });
-  };
   return (
     <TableRow>
       <Name>{fullName}</Name>
@@ -112,12 +109,10 @@ function UserRow({ user }) {
               onConfirm={handleUserStatusUpdate}
             />
           </Modal.Window>
-        </Modal>
-        <ActionButtonIcon>
-          <HiPencil />
-        </ActionButtonIcon>
+          <ActionButtonIcon>
+            <HiPencil />
+          </ActionButtonIcon>
 
-        <Modal>
           <Modal.Open modalName="deleteUser">
             <ActionButtonIcon>
               <RiDeleteBin6Line />
@@ -126,7 +121,7 @@ function UserRow({ user }) {
           <Modal.Window windowName="deleteUser">
             <ConfirmDelete
               resourceName={fullName}
-              onConfirm={handleDeleteUser}
+              onConfirm={() => deleteUser(id)}
             />
           </Modal.Window>
         </Modal>

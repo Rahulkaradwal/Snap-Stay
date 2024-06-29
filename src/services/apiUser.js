@@ -31,7 +31,7 @@ export async function updateUserStatus(data, id) {
 
 export async function deleteUser(id) {
   try {
-    await fetch(`${URL}/users/${id}`, {
+    await fetch(`${URL}/users/deleteUser/${id}`, {
       method: 'DELETE',
     });
   } catch (err) {

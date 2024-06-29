@@ -7,7 +7,7 @@ function useAllUser() {
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search') || '';
   const { data = {}, isLoading } = useQuery({
-    queryKey: ['user', search],
+    queryKey: ['users', search],
     queryFn: () => getAllUsers(search),
   });
   return { data, isLoading };

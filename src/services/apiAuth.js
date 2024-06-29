@@ -24,6 +24,7 @@ export async function login(userData) {
 }
 
 export async function SignUp(userData) {
+  console.log(userData);
   try {
     const res = await fetch(`${URL}/users/signup`, {
       method: 'POST',
