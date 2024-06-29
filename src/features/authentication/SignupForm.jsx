@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../ui/Button';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
@@ -6,6 +7,7 @@ import Input from '../../ui/Input';
 // Email regex: /\S+@\S+\.\S+/
 
 function SignupForm() {
+  const navigate = useNavigate();
   return (
     <Form>
       <FormRow label="Full name" error={''}>
@@ -25,11 +27,10 @@ function SignupForm() {
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
-        <Button $variation="secondary" type="reset">
-          Cancel
+        <Button $variation="secondary" onClick={() => navigate('/login')}>
+          Login
         </Button>
-        <Button>Create new user</Button>
+        <Button>Signup</Button>
       </FormRow>
     </Form>
   );

@@ -15,6 +15,7 @@ import Booking from './pages/Booking';
 import Users from './pages/Users';
 import Account from './pages/Account';
 import AppLayout from './ui/AppLayout';
+import Signup from './pages/Signup';
 
 // styles
 import GlobalStyles from './styles/GlobalStyles';
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
   },
   {
     path: '*',

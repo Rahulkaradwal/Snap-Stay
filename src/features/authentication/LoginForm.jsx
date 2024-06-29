@@ -5,8 +5,12 @@ import Input from '../../ui/Input';
 import SpinnerMini from '../../ui/SpinnerMini';
 import FormRowVertical from '../../ui/FormRowVertical';
 import useLogin from './useLogin';
+import FormRow from '../../ui/FormRow';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const { userLogin, isLoading } = useLogin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,9 +44,14 @@ function LoginForm() {
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button disabled={isLoading} $size="large">
-          {isLoading ? <SpinnerMini /> : 'Log in'}
-        </Button>
+        <FormRow>
+          <Button $variation="secondary" onClick={() => navigate('/signup')}>
+            SignUp
+          </Button>
+          <Button disabled={isLoading}>
+            {isLoading ? <SpinnerMini /> : 'Log in'}
+          </Button>
+        </FormRow>
       </FormRowVertical>
     </Form>
   );
