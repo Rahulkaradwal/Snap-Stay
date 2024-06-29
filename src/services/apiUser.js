@@ -28,3 +28,13 @@ export async function updateUserStatus(data, id) {
     throw new Error('Users not found');
   }
 }
+
+export async function deleteUser(id) {
+  try {
+    await fetch(`${URL}/users/${id}`, {
+      method: 'DELETE',
+    });
+  } catch (err) {
+    throw new Error('Sorry! Could not delete the user');
+  }
+}

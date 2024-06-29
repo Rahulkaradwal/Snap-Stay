@@ -8,6 +8,7 @@ import { HiPencil } from 'react-icons/hi2';
 import { GiSightDisabled } from 'react-icons/gi';
 import { format } from 'date-fns';
 import useUpdateStatus from './useUpdateStatus';
+import useDelete from './useDelete';
 
 const TableRow = styled.div`
   display: grid;
@@ -82,10 +83,14 @@ function UserRow({ user }) {
   } = user;
 
   const { updateStatus, isLoading } = useUpdateStatus();
-
+  const { deleteUser, isLoading: isDeleting } = useDelete();
   const handleUserStatusUpdate = () => {
     const data = { active: !status };
     updateStatus({ data, id });
+  };
+
+  const handleDeleteUser = () => {
+    deleteUser({ id });
   };
   return (
     <TableRow>
@@ -96,7 +101,7 @@ function UserRow({ user }) {
       <ButtonIcon>
         <Modal>
           <Modal.Open modalName="updateUserStatus">
-            <ActionButtonIcon>
+            <ActionButtonIcon disabled={isLoading}>
               {status === true ? <GiSightDisabled /> : <GrView />}
             </ActionButtonIcon>
           </Modal.Open>
@@ -120,8 +125,8 @@ function UserRow({ user }) {
           </Modal.Open>
           <Modal.Window windowName="deleteUser">
             <ConfirmDelete
-              resourceName="User"
-              onConfirm={() => console.log('Button Clicked')}
+              resourceName={fullName}
+              onConfirm={handleDeleteUser}
             />
           </Modal.Window>
         </Modal>

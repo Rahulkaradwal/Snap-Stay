@@ -33,8 +33,8 @@ function ConfirmDelete({
         {actionName} {resourceName}
       </Heading>
       <p>
-        Are you sure you want to {actionName} this {resourceName} permanently?
-        This action cannot be undone.
+        Are you sure you want to {actionName} {resourceName} permanently? This
+        action cannot be undone.
       </p>
 
       <div>
