@@ -5,6 +5,7 @@ import Row from '../../ui/Row';
 import useTodayBooking from '../bookings/useTodaysBooking';
 import Spinner from '../../ui/Spinner';
 import TodayItem from './TodayItem';
+
 const StyledToday = styled.div`
   /* Box */
   background-color: var(--color-grey-0);

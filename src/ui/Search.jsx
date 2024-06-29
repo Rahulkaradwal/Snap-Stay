@@ -25,7 +25,7 @@ function Search() {
   return (
     <SearchBar>
       <Input
-        placeholder="Search.."
+        placeholder="Search by name"
         onChange={(e) => setSearchVal(e.target.value)}
       />
       <ButtonIcon onClick={handleSubmit}>
