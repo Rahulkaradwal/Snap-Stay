@@ -14,3 +14,17 @@ export async function getAllUsers(search) {
     throw new Error('Users not found');
   }
 }
+
+export async function updateUserStatus(data, id) {
+  try {
+    await fetch(`${URL}/users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    throw new Error('Users not found');
+  }
+}

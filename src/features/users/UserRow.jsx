@@ -7,6 +7,7 @@ import ConfirmDelete from '../../ui/ConfirmDelete';
 import { HiPencil } from 'react-icons/hi2';
 import { GiSightDisabled } from 'react-icons/gi';
 import { format } from 'date-fns';
+import useUpdateStatus from './useUpdateStatus';
 
 const TableRow = styled.div`
   display: grid;
@@ -71,7 +72,21 @@ const ButtonIcon = styled.div`
 `;
 
 function UserRow({ user }) {
-  const { active: status, createdAt: joinedDate, email, fullName } = user;
+  console.log(user);
+  const {
+    active: status,
+    createdAt: joinedDate,
+    email,
+    fullName,
+    _id: id,
+  } = user;
+
+  const { updateStatus, isLoading } = useUpdateStatus();
+
+  const handleUserStatusUpdate = () => {
+    const data = { active: !status };
+    updateStatus({ data, id });
+  };
   return (
     <TableRow>
       <Name>{fullName}</Name>
@@ -79,13 +94,24 @@ function UserRow({ user }) {
       <Joined>{format(new Date(joinedDate), 'MMM dd yyyy')}</Joined>
       <Status>{status ? 'Active' : 'De-active'}</Status>
       <ButtonIcon>
-        <ActionButtonIcon onClick={() => console.log('button Cliced')}>
-          {/* <GrView /> */}
-          <GiSightDisabled />
-        </ActionButtonIcon>
+        <Modal>
+          <Modal.Open modalName="updateUserStatus">
+            <ActionButtonIcon>
+              {status === true ? <GiSightDisabled /> : <GrView />}
+            </ActionButtonIcon>
+          </Modal.Open>
+          <Modal.Window windowName="updateUserStatus">
+            <ConfirmDelete
+              resourceName={fullName}
+              actionName="Change Status for"
+              onConfirm={handleUserStatusUpdate}
+            />
+          </Modal.Window>
+        </Modal>
         <ActionButtonIcon>
           <HiPencil />
         </ActionButtonIcon>
+
         <Modal>
           <Modal.Open modalName="deleteUser">
             <ActionButtonIcon>
