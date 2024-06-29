@@ -9,3 +9,17 @@ export async function getSettings() {
     throw new Error('Could not load the settings');
   }
 }
+
+export async function updateSettingsApi(data, id) {
+  try {
+    await fetch(`${URL}/settings/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (err) {
+    throw new Error('Sorry! Could not add Cabin');
+  }
+}

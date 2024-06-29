@@ -1,6 +1,7 @@
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
+import useUpdateSettings from './useUpdateSettings';
 
 function UpdateSettingsForm({ setting }) {
   const {
@@ -11,21 +12,20 @@ function UpdateSettingsForm({ setting }) {
     _id: settingId,
   } = setting;
 
-  const updateSetting = (val) => {
-    console.log(val);
-  }; // dummy for hook
+  const { updateSettings, isLoading } = useUpdateSettings();
 
   function handleUpdate(e, field) {
     const { value } = e.target;
     if (!value) return;
 
-    updateSetting({ [field]: value });
+    updateSettings({ data: { [field]: value }, id: settingId });
   }
 
   return (
     <Form>
       <FormRow label="Minimum nights/booking">
         <Input
+          disabled={isLoading}
           type="number"
           id="min-nights"
           defaultValue={minBookingLength}
@@ -34,6 +34,7 @@ function UpdateSettingsForm({ setting }) {
       </FormRow>
       <FormRow label="Maximum nights/booking">
         <Input
+          disabled={isLoading}
           type="number"
           id="max-nights"
           defaultValue={maxBookingLength}
@@ -42,6 +43,7 @@ function UpdateSettingsForm({ setting }) {
       </FormRow>
       <FormRow label="Maximum guests/booking">
         <Input
+          disabled={isLoading}
           type="number"
           id="max-guests"
           defaultValue={maxGuestPerBooking}
@@ -50,6 +52,7 @@ function UpdateSettingsForm({ setting }) {
       </FormRow>
       <FormRow label="Breakfast price">
         <Input
+          disabled={isLoading}
           type="number"
           id="breakfast-price"
           defaultValue={breakfastPrice}
