@@ -38,3 +38,24 @@ export async function deleteUser(id) {
     throw new Error('Sorry! Could not delete the user');
   }
 }
+
+export async function getCurrentUser() {
+  const token = localStorage.getItem('authToken');
+  try {
+    const response = await fetch(`${URL}/users/currentUser`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Sorry! Could not find the user');
+    }
+
+    const data = await response.json();
+    return data.user;
+  } catch (err) {
+    throw new Error('Sorry! Could not find the user');
+  }
+}

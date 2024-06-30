@@ -15,6 +15,9 @@ function useLogin() {
       const tokenExpireTime = new Date();
       tokenExpireTime.setHours(tokenExpireTime.getHours() + 1);
       localStorage.setItem('tokenExpireTime', tokenExpireTime.toISOString());
+      console.log('data', data);
+      localStorage.setItem('userName', data.data.fullName);
+      localStorage.setItem('email', data.data.email);
 
       navigate('/dashboard');
     },
