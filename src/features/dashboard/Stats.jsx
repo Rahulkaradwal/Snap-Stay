@@ -13,6 +13,8 @@ function Stats({ bookings = [], confirmedStays = [] }) {
     (acc, cur) => acc + cur.numNights,
     0
   );
+  console.log('confirmed stays', confirmedStays);
+  console.log('Occupation', occupation);
 
   return (
     <>

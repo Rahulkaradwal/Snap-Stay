@@ -31,17 +31,17 @@ const ChartBox = styled.div`
 const startDataLight = [
   {
     duration: '1 night',
-    value: 2,
+    value: 0,
     color: '#ef4444',
   },
   {
     duration: '2 nights',
-    value: 1,
+    value: 0,
     color: '#f97316',
   },
   {
     duration: '3 nights',
-    value: 6,
+    value: 0,
     color: '#eab308',
   },
   {
@@ -51,7 +51,7 @@ const startDataLight = [
   },
   {
     duration: '6-7 nights',
-    value: 7,
+    value: 0,
     color: '#22c55e',
   },
   {
@@ -79,17 +79,17 @@ const startDataDark = [
   },
   {
     duration: '2 nights',
-    value: 3,
+    value: 0,
     color: '#c2410c',
   },
   {
     duration: '3 nights',
-    value: 5,
+    value: 0,
     color: '#a16207',
   },
   {
     duration: '4-5 nights',
-    value: 7,
+    value: 0,
     color: '#4d7c0f',
   },
   {
@@ -99,7 +99,7 @@ const startDataDark = [
   },
   {
     duration: '8-14 nights',
-    value: 2,
+    value: 0,
     color: '#0f766e',
   },
   {
@@ -153,7 +153,7 @@ function DurationChart({ confirmedStays = [] }) {
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
-            data={startData}
+            data={data}
             nameKey="duration"
             dataKey="value"
             innerRadius={85}
