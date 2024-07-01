@@ -59,3 +59,27 @@ export async function getCurrentUser() {
     throw new Error('Sorry! Could not find the user');
   }
 }
+
+export async function updateUserData(userData) {
+  console.log(JSON.stringify(userData));
+  const token = localStorage.getItem('authToken');
+  try {
+    const response = await fetch(`${URL}/users/updateMe`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Sorry! Could not update the user');
+    }
+
+    const data = await response.json();
+    console.log('in the userupdate api', data.user);
+    return data.user;
+  } catch (err) {
+    throw new Error('Sorry! Could not update the user');
+  }
+}

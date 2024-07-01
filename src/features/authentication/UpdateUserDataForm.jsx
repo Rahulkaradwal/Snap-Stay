@@ -5,6 +5,7 @@ import FileInput from '../../ui/FileInput';
 import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
+import useUserDataUpdate from './useUserDataUpdate';
 
 function UpdateUserDataForm() {
   const email = localStorage.getItem('email');
@@ -13,8 +14,12 @@ function UpdateUserDataForm() {
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
 
+  const { userUpdate, isLoading } = useUserDataUpdate();
+
   function handleSubmit(e) {
     e.preventDefault();
+    const userData = { fullName };
+    userUpdate(userData);
   }
 
   return (

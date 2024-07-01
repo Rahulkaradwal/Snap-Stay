@@ -27,7 +27,7 @@ import { Toaster } from 'react-hot-toast';
 import { DarkModeProvider } from './context/DarkModeContext';
 import ProtectedRoute from './ui/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
-import useTokenInterceptor from './context/useTokenInterceptor';
+// import useTokenInterceptor from './context/useTokenInterceptor';
 
 const router = createBrowserRouter([
   {
