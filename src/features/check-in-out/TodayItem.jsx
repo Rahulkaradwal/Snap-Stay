@@ -32,7 +32,11 @@ function TodayItem({ activity }) {
     <StyledTodayItem>
       {status === 'unconfirmed' && <Tag type="green">Arriving</Tag>}
       {status === 'checked-in' && <Tag type="blue">Departing</Tag>}
-      <Guest>{guest.fullName ? guest.fullName : 'No Name'}</Guest>
+      {!guest ? (
+        <Guest>No Guest Found</Guest>
+      ) : (
+        <Guest>{guest.fullName ? guest.fullName : 'No Name'}</Guest>
+      )}
       <div>{numNights} nights</div>
       {status === 'unconfirmed' && (
         <Button

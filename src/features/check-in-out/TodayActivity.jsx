@@ -43,6 +43,7 @@ function TodayActivity() {
   const { data, isLoading } = useTodayBooking();
 
   const activities = data.data;
+  console.log('activities', activities);
 
   return (
     <StyledToday>
