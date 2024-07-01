@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '../../ui/Button';
 import FileInput from '../../ui/FileInput';
@@ -6,10 +6,20 @@ import Form from '../../ui/Form';
 import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import useUserDataUpdate from './useUserDataUpdate';
+import useUser from './useUser';
 
 function UpdateUserDataForm() {
-  const email = localStorage.getItem('email');
-  const currentFullName = localStorage.getItem('userName');
+  const { data, isLoading: isUserLoading } = useUser();
+  const [email, setEmail] = useState('');
+  const [currentFullName, setCurrentFullName] = useState('');
+
+  useEffect(() => {
+    if (!isUserLoading && data) {
+      setEmail(data.email);
+      setCurrentFullName(data.fullName);
+      setFullName(data.fullName);
+    }
+  }, [data, isUserLoading]);
 
   const [fullName, setFullName] = useState(currentFullName);
   const [avatar, setAvatar] = useState(null);
@@ -18,7 +28,7 @@ function UpdateUserDataForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const userData = { fullName };
+    const userData = { fullName, avatar }; // Include avatar if needed
     userUpdate(userData);
   }
 
@@ -46,7 +56,9 @@ function UpdateUserDataForm() {
         <Button type="reset" $variation="secondary">
           Cancel
         </Button>
-        <Button>Update account</Button>
+        <Button type="submit" isLoading={isLoading}>
+          Update account
+        </Button>
       </FormRow>
     </Form>
   );

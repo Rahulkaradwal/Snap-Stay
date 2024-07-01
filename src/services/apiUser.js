@@ -61,12 +61,12 @@ export async function getCurrentUser() {
 }
 
 export async function updateUserData(userData) {
-  console.log(JSON.stringify(userData));
   const token = localStorage.getItem('authToken');
   try {
     const response = await fetch(`${URL}/users/updateMe`, {
       method: 'PATCH',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(userData),

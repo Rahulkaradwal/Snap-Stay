@@ -6,16 +6,11 @@ function useUserDataUpdate() {
   const queryClient = useQueryClient();
   const { mutate: userUpdate, isLoading } = useMutation({
     mutationFn: (userData) => updateUserData(userData),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['currentUser'],
       });
       toast.success('User Updated !!');
-      localStorage.setItem('userName', data.fullName);
-    },
-    onError: () => {
-      toast.error('Could not Update the user!');
     },
   });
   return { userUpdate, isLoading };
