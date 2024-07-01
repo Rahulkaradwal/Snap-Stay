@@ -77,7 +77,6 @@ export async function updateUserData(userData) {
     }
 
     const data = await response.json();
-    console.log('in the userupdate api', data.user);
     return data.user;
   } catch (err) {
     throw new Error('Sorry! Could not update the user');

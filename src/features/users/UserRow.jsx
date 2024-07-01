@@ -73,7 +73,6 @@ const ButtonIcon = styled.div`
 `;
 
 function UserRow({ user }) {
-  console.log(user);
   const {
     active: status,
     createdAt: joinedDate,

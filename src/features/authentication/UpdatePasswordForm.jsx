@@ -14,7 +14,6 @@ function UpdatePasswordForm() {
   let isUpdating = false;
   function onSubmit({ password }) {
     // updateUser({ password }, { onSuccess: reset });
-    console.log('hi');
   }
 
   return (

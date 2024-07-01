@@ -8,6 +8,7 @@ import FormRow from '../../ui/FormRow';
 
 import { useAddCabin } from './useAddCabin';
 import { useUpdateCabin } from './useUpdateCabin';
+import useSettings from '../settings/useSettings';
 
 function CreateCabinForm({ cabin = {}, onCloseModel }) {
   const { _id: editId, ...editValues } = cabin;
@@ -21,6 +22,10 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
   } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
+
+  const { data: settings } = useSettings();
+
+  console.log('settings', settings);
 
   const { addCabin, isAdding } = useAddCabin();
   const { updateCabin, isUpdating } = useUpdateCabin();
@@ -42,7 +47,6 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
     } else {
       addCabin(
         // { ...data, image },
-        // console.log(image)
         data,
         {
           onSuccess: () => {

@@ -42,7 +42,6 @@ function UserTable() {
   }
 
   if (!users) return <NoData>Sorry! Users not found</NoData>;
-  console.log(users);
   return (
     <>
       <Table>

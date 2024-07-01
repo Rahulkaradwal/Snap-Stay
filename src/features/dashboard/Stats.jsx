@@ -5,16 +5,14 @@ import { formatCurrency } from '../../utils/helpers';
 
 function Stats({ bookings = [], confirmedStays = [] }) {
   const numBookings = bookings.length;
-  //   const sales = bookings.reduce((acc, curr)=> acc+curr.totalPrice, 0);
+  const sales = bookings.reduce((acc, curr) => acc + curr.totalPrice, 0);
 
-  const sales = 11484;
   const checkins = confirmedStays.length;
 
-  //   const occupation = confirmedStays.reduce(
-  //     (acc, cur) => acc + cur.numNights,
-  //     0
-  //   );
-  // need to fix this
+  const occupation = confirmedStays.reduce(
+    (acc, cur) => acc + cur.numNights,
+    0
+  );
 
   return (
     <>
@@ -43,7 +41,7 @@ function Stats({ bookings = [], confirmedStays = [] }) {
         title="Occupancy Rate"
         color="yellow"
         icon={<HiOutlineChartBar />}
-        value={80}
+        value={occupation}
       />
     </>
   );
