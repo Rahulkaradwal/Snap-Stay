@@ -73,7 +73,7 @@ function CabinRow({ cabin }) {
             </ActionButtonIcon>
           </Modal.Open>
           <Modal.Window windowName="editForm">
-            <CreateCabinForm cabin="cabin" />
+            <CreateCabinForm cabin={cabin} />
           </Modal.Window>
           <Modal.Open modalName="deleteCabin">
             <ActionButtonIcon>
