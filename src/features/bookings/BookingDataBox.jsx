@@ -11,6 +11,7 @@ import DataItem from '../../ui/DataItem';
 import { Flag } from '../../ui/Flag';
 
 import { formatDistanceFromNow, formatCurrency } from '../../utils/helpers';
+import { useEffect, useState } from 'react';
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -110,14 +111,25 @@ function BookingDataBox({ booking }) {
     numNights,
     numGuests,
     cabinPrice,
-    extrasPrice,
     totalPrice,
     hasBreakfast,
     observations,
     isPaid,
     guest: { fullName: guestName, email, nationalID },
-    cabin: { name: cabinName },
+    cabin: { name: cabinName, bookingSettings },
   } = booking;
+  console.log(booking);
+
+  const [breakFast, setBreakFast] = useState();
+
+  useEffect(() => {
+    if (bookingSettings) {
+      setBreakFast(bookingSettings.breakfastPrice);
+    }
+  }, [booking, bookingSettings]);
+
+  let extrasPrice = breakFast + totalPrice;
+  console.log(breakFast, extrasPrice);
 
   return (
     <StyledBookingDataBox>
@@ -169,11 +181,10 @@ function BookingDataBox({ booking }) {
 
         <Price $isPaid={isPaid}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
-            {/* {formatCurrency(totalPrice)} */}
-            Total Price
+            {formatCurrency(extrasPrice)}
             {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
+              ` (${formatCurrency(totalPrice)} cabin + ${formatCurrency(
+                breakFast
               )} breakfast)`}
           </DataItem>
 

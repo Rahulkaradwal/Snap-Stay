@@ -78,6 +78,7 @@ function BookingRow({
     status,
     guest,
     cabin,
+    totalPrice,
   },
 }) {
   const statusToTagName = {
@@ -92,8 +93,6 @@ function BookingRow({
   // const handleDeleteBooking = (bookingId) => {
   //   deleteBooking(bookingId);
   // };
-
-  console.log('guest name', guest);
 
   return (
     <TableRow>
@@ -119,8 +118,7 @@ function BookingRow({
 
       <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
 
-      {/* <Amount>{formatCurrency(totalPrice)}</Amount> */}
-      <Amount>$115</Amount>
+      <Amount>{formatCurrency(totalPrice)}</Amount>
       <ButtonIcon>
         <ActionButtonIcon onClick={() => navigate(`/bookings/${bookingId}`)}>
           <GrView />
