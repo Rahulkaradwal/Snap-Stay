@@ -51,8 +51,6 @@ function BookingTable() {
   const bookings = data?.data || [];
   const count = data?.totalResult || 0;
 
-  console.log('booking table datea', bookings);
-
   if (isLoading) return <Spinner />;
 
   return (

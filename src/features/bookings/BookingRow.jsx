@@ -93,13 +93,15 @@ function BookingRow({
   //   deleteBooking(bookingId);
   // };
 
+  console.log('guest name', guest);
+
   return (
     <TableRow>
-      <Cabin>{cabin ? cabin.name : 'No Cabin Name'}</Cabin>
+      <Cabin>{cabin && cabin.name}</Cabin>
 
       <Stacked>
-        <span>{guest ? guest.guestName : 'Rahul'}</span>
-        <span>{guest ? guest.email : 'rahul@gmail.com'}</span>
+        <span>{guest && guest.fullName}</span>
+        <span>{guest && guest.email}</span>
       </Stacked>
 
       <Stacked>
