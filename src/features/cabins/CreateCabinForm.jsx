@@ -9,6 +9,7 @@ import FormRow from '../../ui/FormRow';
 import { useAddCabin } from './useAddCabin';
 import { useUpdateCabin } from './useUpdateCabin';
 import useSettings from '../settings/useSettings';
+import { useEffect, useState } from 'react';
 
 function CreateCabinForm({ cabin = {}, onCloseModel }) {
   const { _id: editId, ...editValues } = cabin;
@@ -23,20 +24,38 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
     defaultValues: isEditSession ? editValues : {},
   });
 
-  const { data: settings } = useSettings();
+  const [settingId, setSettingId] = useState('');
 
-  console.log('settings', settings);
+  const { data } = useSettings();
+  const settings = data?.data;
+
+  useEffect(() => {
+    if (settings && settings.length > 0) {
+      let setId = settings[0]._id;
+      setSettingId(setId);
+    }
+  }, [settings]);
 
   const { addCabin, isAdding } = useAddCabin();
   const { updateCabin, isUpdating } = useUpdateCabin();
 
   const onSubmit = (data) => {
-    // const image = typeof data.image === 'string' ? data.image : data.image[0];
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      if (key === 'image' && data.image[0]) {
+        formData.append(key, data.image[0]);
+      } else {
+        formData.append(key, data[key]);
+      }
+    });
+
+    if (!isEditSession) {
+      formData.append('bookingSettings', settingId);
+    }
 
     if (isEditSession) {
       updateCabin(
-        // { newCabinData: { ...data, image }, id: editId },
-        { data, id: editId },
+        { formData, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -45,15 +64,12 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
         }
       );
     } else {
-      addCabin(
-        // { ...data, image },
-        data,
-        {
-          onSuccess: () => {
-            reset(), onCloseModel?.();
-          },
-        }
-      );
+      addCabin(formData, {
+        onSuccess: () => {
+          reset();
+          onCloseModel?.();
+        },
+      });
     }
   };
 
@@ -113,9 +129,9 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
         <FileInput
           id="image"
           accept="image/*"
-          // {...register('image', {
-          //   // required: isEditSession ? false : 'This field is required',
-          // })}
+          {...register('image', {
+            required: isEditSession ? false : 'This field is required',
+          })}
         />
       </FormRow>
 

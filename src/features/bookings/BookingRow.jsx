@@ -77,7 +77,7 @@ function BookingRow({
     numNights,
     status,
     guest,
-    cabin: { name: cabinName },
+    cabin,
   },
 }) {
   const statusToTagName = {
@@ -95,7 +95,7 @@ function BookingRow({
 
   return (
     <TableRow>
-      <Cabin>{cabinName}</Cabin>
+      <Cabin>{cabin ? cabin.name : 'No Cabin Name'}</Cabin>
 
       <Stacked>
         <span>{guest ? guest.guestName : 'Rahul'}</span>
@@ -131,7 +131,7 @@ function BookingRow({
           </Modal.Open>
           <Modal.Window windowName="deleteBooking">
             <ConfirmDelete
-              resourceName={cabinName}
+              resourceName={cabin ? cabin.name : 'No cabin Name'}
               onConfirm={() => deleteBooking(bookingId)}
             />
           </Modal.Window>

@@ -6,7 +6,7 @@ export function useAddCabin() {
   const queryClient = useQueryClient();
 
   const { mutate: addCabin, isLoading: isAdding } = useMutation({
-    mutationFn: (data) => createEditCabin(data),
+    mutationFn: (formData) => createEditCabin(formData),
     onSuccess: () => {
       toast.success('Cabin added successfully!');
       queryClient.invalidateQueries({ queryKey: ['cabins'] });
@@ -15,5 +15,6 @@ export function useAddCabin() {
       toast.error('Sorry! Could not add Cabin');
     },
   });
+
   return { addCabin, isAdding };
 }
