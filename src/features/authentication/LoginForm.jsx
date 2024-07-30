@@ -7,19 +7,28 @@ import FormRowVertical from '../../ui/FormRowVertical';
 import useLogin from './useLogin';
 import FormRow from '../../ui/FormRow';
 import { useNavigate } from 'react-router-dom';
+import { getCurrentTimePlus30Minutes } from '../../utils/getTime';
+import { useAuth } from '../../context/AuthContext';
 
 function LoginForm() {
-  const navigate = useNavigate();
-
   const { userLogin, isLoading } = useLogin();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const time = Number(getCurrentTimePlus30Minutes());
+
+  const { loginCtx } = useAuth();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password) return;
     const userData = { email, password };
-    userLogin(userData);
+    userLogin(userData, {
+      onSuccess: (data) => {
+        loginCtx(data.token, time);
+        navigate('/dashboard');
+      },
+    });
   }
 
   return (

@@ -27,6 +27,7 @@ import { Toaster } from 'react-hot-toast';
 import { DarkModeProvider } from './context/DarkModeContext';
 import ProtectedRoute from './ui/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import ProtectRoute from './features/authentication/ProtectRoute';
 // import useTokenInterceptor from './context/useTokenInterceptor';
 
 const router = createBrowserRouter([
@@ -43,32 +44,60 @@ const router = createBrowserRouter([
       },
       {
         path: 'dashboard',
-        element: <Dashboard />,
+        element: (
+          <ProtectRoute>
+            <Dashboard />
+          </ProtectRoute>
+        ),
       },
       {
         path: '/bookings',
-        element: <Bookings />,
+        element: (
+          <ProtectRoute>
+            <Bookings />
+          </ProtectRoute>
+        ),
       },
       {
         path: '/bookings/:bookingId',
-        element: <Booking />,
+        element: (
+          <ProtectRoute>
+            <Booking />
+          </ProtectRoute>
+        ),
       },
       {
         path: '/account',
-        element: <Account />,
+        element: (
+          <ProtectRoute>
+            <Account />
+          </ProtectRoute>
+        ),
       },
       {
         path: '/cabins',
-        element: <Cabins />,
+        element: (
+          <ProtectRoute>
+            <Cabins />
+          </ProtectRoute>
+        ),
       },
 
       {
         path: '/settings',
-        element: <Settings />,
+        element: (
+          <ProtectRoute>
+            <Settings />
+          </ProtectRoute>
+        ),
       },
       {
         path: '/users',
-        element: <Users />,
+        element: (
+          <ProtectRoute>
+            <Users />
+          </ProtectRoute>
+        ),
       },
     ],
   },
