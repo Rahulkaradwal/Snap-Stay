@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import getCurrentTime from '../utils/getTime';
 
 const AuthContext = createContext();
 
@@ -23,7 +24,7 @@ const AuthProvider = ({ children }) => {
     return token !== null && !isTokenExpired(expirationTime);
   };
 
-  logout = () => {
+  const logout = () => {
     setToken(null);
     setIsAuthenticated(false);
     localStorage.removeItem('authToken');
@@ -57,7 +58,8 @@ const AuthProvider = ({ children }) => {
       value={{
         token,
         isAuthenticated,
-        login: loginCtx,
+        loginCtx,
+        authChecker,
         logout,
         expirationTime,
       }}
