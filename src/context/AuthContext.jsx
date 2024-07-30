@@ -2,49 +2,70 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 const AuthContext = createContext();
 
-function AuthProvider({ children }) {
-  const [authToken, setAuthToken] = useState(localStorage.getItem('authToken'));
-  const [isAuthenticated, setIsAuthenticated] = useState(!!authToken);
+// helper function to check if the token is expired
+
+const isTokenExpired = (expiration) => {
+  if (!expiration) return true;
+  return getCurrentTime() > expiration;
+};
+
+const AuthProvider = ({ children }) => {
+  const [token, setToken] = useState(localStorage.getItem('authToken'));
+
+  const [expirationTime, setExpirationTime] = useState(() => {
+    const storedValue = localStorage.getItem('tokenExpireTime');
+    return storedValue ? parseInt(storedValue, 10) : null;
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const authChecker = () => {
+    return token !== null && !isTokenExpired(expirationTime);
+  };
+
+  logout = () => {
+    setToken(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenExpireTime');
+  };
 
   useEffect(() => {
-    setIsAuthenticated(!!authToken);
-  }, [authToken]);
+    if (token && !isTokenExpired(expirationTime)) {
+      setIsAuthenticated(true);
+    } else {
+      logout();
+    }
+  }, [expirationTime, token]);
 
-  const logout = () => {
-    setAuthToken(null);
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
-  };
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('authToken', token);
+    }
+  });
 
-  const loginContext = (token) => {
-    setAuthToken(token);
-    localStorage.setItem('authToken', token);
+  const loginCtx = (token, expiration) => {
+    setToken(token);
+    setExpirationTime(expiration);
     setIsAuthenticated(true);
-  };
-
-  const checkAuth = () => {
-    const storedExpirationDate = localStorage.getItem('tokenExpireTime');
-    const expirationDate = new Date(storedExpirationDate);
-    const now = new Date();
-    const duration = expirationDate.getTime() - now.getTime();
-    return duration;
+    localStorage.setItem('authToken', token);
+    localStorage.setItem('tokenExpireTime', expiration.toString());
   };
 
   return (
     <AuthContext.Provider
       value={{
-        authToken,
+        token,
         isAuthenticated,
-        setAuthToken,
+        login: loginCtx,
         logout,
-        loginContext,
-        checkAuth,
+        expirationTime,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
 function useAuth() {
   const context = useContext(AuthContext);
