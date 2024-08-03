@@ -26,6 +26,7 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activity }) {
+  console.log('activity', activity);
   const { checkIn, isLoading: isCheckingIn } = useCheckin();
   const { _id: id, status, guest, numNights = 0 } = activity;
   return (
@@ -35,7 +36,7 @@ function TodayItem({ activity }) {
       {!guest ? (
         <Guest>No Guest Found</Guest>
       ) : (
-        <Guest>{guest.fullName ? guest.fullName : 'No Name'}</Guest>
+        <Guest>{guest.firstName ? guest.lastName : 'No Name'}</Guest>
       )}
       <div>{numNights} nights</div>
       {status === 'unconfirmed' && (

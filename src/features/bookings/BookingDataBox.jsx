@@ -115,7 +115,7 @@ function BookingDataBox({ booking }) {
     hasBreakfast,
     observations,
     isPaid,
-    guest: { fullName: guestName, email, nationalID },
+    guest,
     cabin: { name: cabinName, bookingSettings },
   } = booking;
   console.log(booking);
@@ -158,12 +158,13 @@ function BookingDataBox({ booking }) {
           />
           {/* {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />} */}
           <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ''}
+            {`${guest.firstName} ${guest.lastName}`}{' '}
+            {numGuests > 1 ? `+ ${numGuests - 1} guests` : ''}
           </p>
           <span>&bull;</span>
-          <p>{email}</p>
+          <p>{guest.email}</p>
           <span>&bull;</span>
-          <p>National ID {nationalID}</p>
+          <p>Contact No. {guest.phoneNumber}</p>
         </Guest>
 
         {observations && (

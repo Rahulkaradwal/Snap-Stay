@@ -90,17 +90,13 @@ function BookingRow({
   const navigate = useNavigate();
   const { deleteBooking } = useDeleteBooking();
 
-  // const handleDeleteBooking = (bookingId) => {
-  //   deleteBooking(bookingId);
-  // };
-
   return (
     <TableRow>
       <Cabin>{cabin && cabin.name}</Cabin>
 
       <Stacked>
-        <span>{guest && guest.fullName}</span>
-        <span>{guest && guest.email}</span>
+        <span>{guest && guest.firstName}</span>
+        <span>{guest && guest.lastName}</span>
       </Stacked>
 
       <Stacked>

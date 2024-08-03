@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const authChecker = () => {
+    console.log('AuthChecker: ', !isTokenExpired(expirationTime));
     return token !== null && !isTokenExpired(expirationTime);
   };
 

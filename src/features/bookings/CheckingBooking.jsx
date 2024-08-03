@@ -58,7 +58,7 @@ function CheckingBooking({ booking }) {
                 onChange={() => setConfirmPaid((confirm) => !confirm)}
                 id="confirm"
               >
-                I confirm that {booking.guest.fullName} has paid the total
+                I confirm that {booking.guest.lastName} has paid the total
                 amount
               </Checkbox>
             </Box>
