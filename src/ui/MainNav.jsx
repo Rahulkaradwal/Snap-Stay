@@ -78,7 +78,7 @@ function MainNav() {
         <li>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
-            <span>Users</span>
+            <span>Guests</span>
           </StyledNavLink>
         </li>
         <li>

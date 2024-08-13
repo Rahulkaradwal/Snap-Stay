@@ -1,12 +1,12 @@
 import URL from './URL';
 
-export async function getAllUsers(search) {
+export async function getAllGuests(search) {
   try {
     let res;
     if (search.length > 0) {
-      res = await fetch(`${URL}/users/name/${search}`);
+      res = await fetch(`${URL}/guests/lastName/${search}`);
     } else {
-      res = await fetch(`${URL}/users/`);
+      res = await fetch(`${URL}/guests/`);
     }
     const data = await res.json();
     return data;
@@ -15,9 +15,9 @@ export async function getAllUsers(search) {
   }
 }
 
-export async function updateUserStatus(data, id) {
+export async function updateGuestStatus(data, id) {
   try {
-    await fetch(`${URL}/users/${id}`, {
+    await fetch(`${URL}/guests/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -25,13 +25,13 @@ export async function updateUserStatus(data, id) {
       body: JSON.stringify(data),
     });
   } catch (err) {
-    throw new Error('Users not found');
+    throw new Error('Guest not found');
   }
 }
 
-export async function deleteUser(id) {
+export async function deleteGuestApi(id) {
   try {
-    await fetch(`${URL}/users/deleteUser/${id}`, {
+    await fetch(`${URL}/guests/${id}`, {
       method: 'DELETE',
     });
   } catch (err) {

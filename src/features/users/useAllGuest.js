@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getAllUsers } from '../../services/apiUser';
+import { getAllGuests } from '../../services/apiUser';
 import { useSearchParams } from 'react-router-dom';
 
-function useAllUser() {
+function useAllGuests() {
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search') || '';
   const { data = {}, isLoading } = useQuery({
-    queryKey: ['users', search],
-    queryFn: () => getAllUsers(search),
+    queryKey: ['guests', search],
+    queryFn: () => getAllGuests(search),
   });
   return { data, isLoading };
 }
-export default useAllUser;
+export default useAllGuests;

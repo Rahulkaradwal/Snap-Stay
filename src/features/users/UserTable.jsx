@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import UserRow from './UserRow';
-import useAllUser from './useAllUser';
 import Spinner from '../../ui/Spinner';
+import useAllGuests from './useAllGuest';
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
@@ -34,7 +34,7 @@ const NoData = styled.div`
 `;
 
 function UserTable() {
-  const { data, isLoading } = useAllUser();
+  const { data, isLoading } = useAllGuests();
   const users = data.data;
 
   if (isLoading) {

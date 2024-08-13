@@ -77,20 +77,22 @@ function UserRow({ user }) {
     active: status,
     createdAt: joinedDate,
     email,
-    fullName,
+    firstName,
+    lastName,
     _id: id,
   } = user;
 
   const { updateStatus, isLoading } = useUpdateStatus();
-  const { deleteUser } = useDelete();
   const handleUserStatusUpdate = () => {
     const data = { active: !status };
     updateStatus({ data, id });
   };
 
+  const { deleteGuest, isLoading: deleteLoading } = useDelete();
+
   return (
     <TableRow>
-      <Name>{fullName}</Name>
+      <Name>{firstName + ' ' + lastName}</Name>
       <Email>{email}</Email>
       <Joined>{format(new Date(joinedDate), 'MMM dd yyyy')}</Joined>
       <Status>{status ? 'Active' : 'De-active'}</Status>
@@ -103,7 +105,7 @@ function UserRow({ user }) {
           </Modal.Open>
           <Modal.Window windowName="updateUserStatus">
             <ConfirmDelete
-              resourceName={fullName}
+              resourceName={lastName}
               actionName="Change Status for"
               onConfirm={handleUserStatusUpdate}
             />
@@ -119,8 +121,8 @@ function UserRow({ user }) {
           </Modal.Open>
           <Modal.Window windowName="deleteUser">
             <ConfirmDelete
-              resourceName={fullName}
-              onConfirm={() => deleteUser(id)}
+              resourceName={lastName}
+              onConfirm={() => deleteGuest(id)}
             />
           </Modal.Window>
         </Modal>

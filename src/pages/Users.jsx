@@ -7,7 +7,7 @@ function NewUsers() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Users</Heading>
+        <Heading as="h1">All Guests</Heading>
         <UserTableOperations />
       </Row>
       <Row>

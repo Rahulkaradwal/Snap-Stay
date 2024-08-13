@@ -1,22 +1,22 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { deleteUser as deleteUserApi } from '../../services/apiUser';
+import { deleteGuestApi } from '../../services/apiUser';
 function useDelete() {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteUser, isLoading } = useMutation({
-    mutationFn: async (id) => deleteUserApi(id),
+  const { mutate: deleteGuest, isLoading } = useMutation({
+    mutationFn: async (id) => deleteGuestApi(id),
     onSuccess: () => {
-      toast.success('User Deleted Successfully!');
+      toast.success('Guest Deleted Successfully!');
       queryClient.invalidateQueries({
-        queryKey: ['users'],
+        queryKey: ['guests'],
       });
     },
     onError: () => {
-      toast.error('Sorry! Could not delete the user');
+      toast.error('Sorry! Could not delete the Guest!');
     },
   });
-  return { deleteUser, isLoading };
+  return { deleteGuest, isLoading };
 }
 
 export default useDelete;
