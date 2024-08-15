@@ -115,7 +115,7 @@ function UserRow({ user }) {
           </ActionButtonIcon>
 
           <Modal.Open modalName="deleteUser">
-            <ActionButtonIcon>
+            <ActionButtonIcon disabled={deleteLoading}>
               <RiDeleteBin6Line />
             </ActionButtonIcon>
           </Modal.Open>
