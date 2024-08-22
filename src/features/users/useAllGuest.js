@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 function useAllGuests() {
   const [searchParams] = useSearchParams();
   const search = searchParams.get('search') || '';
-  const { data = {}, isLoading } = useQuery({
+  const { data = {}, isPending: isLoading } = useQuery({
     queryKey: ['guests', search],
     queryFn: () => getAllGuests(search),
   });

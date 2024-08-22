@@ -26,7 +26,6 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activity }) {
-  console.log('activity', activity);
   const { checkIn, isLoading: isCheckingIn } = useCheckin();
   const { _id: id, status, guest, numNights = 0 } = activity;
   return (

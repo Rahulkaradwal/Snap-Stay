@@ -1,12 +1,24 @@
 import URL from './URL';
 
 export async function getAllGuests(search) {
+  const token = localStorage.getItem('authToken');
+
   try {
     let res;
     if (search.length > 0) {
-      res = await fetch(`${URL}/guests/lastName/${search}`);
+      res = await fetch(`${URL}/guests/lastName/${search}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } else {
-      res = await fetch(`${URL}/guests/`);
+      res = await fetch(`${URL}/guests/`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
     const data = await res.json();
     return data;

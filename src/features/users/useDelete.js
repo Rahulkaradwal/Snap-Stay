@@ -4,7 +4,7 @@ import { deleteGuestApi } from '../../services/apiUser';
 function useDelete() {
   const queryClient = useQueryClient();
 
-  const { mutate: deleteGuest, isLoading } = useMutation({
+  const { mutate: deleteGuest, isPending: isLoading } = useMutation({
     mutationFn: async (id) => deleteGuestApi(id),
     onSuccess: () => {
       toast.success('Guest Deleted Successfully!');
