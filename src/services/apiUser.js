@@ -94,3 +94,26 @@ export async function updateUserData(userData) {
     throw new Error('Sorry! Could not update the user');
   }
 }
+
+export async function updatePasswordApi(userData) {
+  const token = localStorage.getItem('authToken');
+  try {
+    const response = await fetch(`${URL}/users/updatePassword`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      console.log(response);
+      throw new Error('Sorry! Could not update the user');
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+    throw new Error('Sorry! Could not update the user');
+  }
+}

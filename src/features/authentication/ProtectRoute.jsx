@@ -3,7 +3,6 @@ import Login from '../../pages/Login';
 
 function ProtectRoute({ children }) {
   const { authChecker } = useAuth();
-  console.log('routechecker', authChecker());
 
   if (!authChecker()) {
     return <Login />;
