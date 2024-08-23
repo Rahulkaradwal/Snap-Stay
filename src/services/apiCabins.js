@@ -25,7 +25,6 @@ export async function deleteCabin(id) {
 // create a cabin request
 
 export async function createEditCabin(formData, id) {
-  console.log('create api', formData);
   try {
     if (!id) {
       await fetch(`${URL}/cabins`, {

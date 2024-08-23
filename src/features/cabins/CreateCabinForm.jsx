@@ -11,13 +11,14 @@ import { useUpdateCabin } from './useUpdateCabin';
 import useSettings from '../settings/useSettings';
 import { useEffect, useState } from 'react';
 
-function CreateCabinForm({ cabin = {}, onCloseModel }) {
+function CreateCabinForm({ cabin = {}, onCloseModel = () => {} }) {
   const { _id: editId, ...editValues } = cabin;
   const isEditSession = Boolean(editId);
 
   const {
     register,
     handleSubmit,
+
     formState: { errors },
     reset,
   } = useForm({
@@ -34,13 +35,15 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
       let setId = settings[0]._id;
       setSettingId(setId);
     }
-  }, [settings]);
+  }, [settings, setSettingId]);
 
   const { addCabin, isAdding } = useAddCabin();
   const { updateCabin, isUpdating } = useUpdateCabin();
 
   const onSubmit = (data) => {
     const formData = new FormData();
+    formData.append('bookingSettings', settingId);
+
     Object.keys(data).forEach((key) => {
       if (key === 'image' && data.image[0]) {
         formData.append(key, data.image[0]);
@@ -49,11 +52,13 @@ function CreateCabinForm({ cabin = {}, onCloseModel }) {
       }
     });
 
-    if (!isEditSession) {
-      formData.append('bookingSettings', settingId);
-    }
+    // if (!isEditSession) {
+    //   formData.append('bookingSettings', settingId);
+    // }
 
     if (isEditSession) {
+      // formData.append('id', editId);
+
       updateCabin(
         { formData, id: editId },
         {
