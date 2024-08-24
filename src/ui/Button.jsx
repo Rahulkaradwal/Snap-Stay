@@ -2,21 +2,51 @@ import styled, { css } from 'styled-components';
 
 const sizes = {
   small: css`
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.4rem 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
+
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+      padding: 0.6rem 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 1.2rem;
+      padding: 0.4rem 0.8rem;
+    }
   `,
   medium: css`
-    font-size: 1.4rem;
-    padding: 1.2rem 1.6rem;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.2rem;
     font-weight: 500;
+
+    @media (min-width: 768px) {
+      font-size: 1.4rem;
+      padding: 1.2rem 1.6rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 1.4rem;
+      padding: 1.2rem 1.6rem;
+    }
   `,
   large: css`
-    font-size: 1.6rem;
-    padding: 1.2rem 2.4rem;
+    font-size: 1.4rem;
+    padding: 1rem 1.8rem;
     font-weight: 500;
+
+    @media (min-width: 768px) {
+      font-size: 1.6rem;
+      padding: 1.2rem 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 1.6rem;
+      padding: 1.2rem 2.4rem;
+    }
   `,
 };
 

@@ -5,8 +5,16 @@ const StyledLogo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 9.6rem;
+  height: 6rem;
   width: auto;
+
+  @media (min-width: 768px) {
+    height: 7rem;
+  }
+
+  @media (min-width: 1024px) {
+    height: 9.6rem;
+  }
 `;
 
 function Logo() {
