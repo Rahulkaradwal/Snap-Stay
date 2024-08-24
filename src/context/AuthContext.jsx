@@ -11,6 +11,7 @@ const isTokenExpired = (expiration) => {
 };
 
 const AuthProvider = ({ children }) => {
+  // const navigate = useNavigate();
   const [token, setToken] = useState(localStorage.getItem('authToken'));
 
   const [expirationTime, setExpirationTime] = useState(() => {
@@ -58,10 +59,10 @@ const AuthProvider = ({ children }) => {
       value={{
         token,
         isAuthenticated,
-        setIsAuthenticated,
         loginCtx,
         authChecker,
         logout,
+        setIsAuthenticated,
         expirationTime,
       }}
     >

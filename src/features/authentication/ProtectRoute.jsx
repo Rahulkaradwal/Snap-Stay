@@ -1,13 +1,14 @@
+// ProtectRoute.js
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import Login from '../../pages/Login';
 
 function ProtectRoute({ children }) {
-  const { authChecker, setIsAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (!authChecker()) {
-    setIsAuthenticated(false);
-    return <Login />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
+
   return children;
 }
 
