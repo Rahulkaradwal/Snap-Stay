@@ -55,9 +55,9 @@ function LoginForm() {
       </FormRowVertical>
       <FormRowVertical>
         <FormRow>
-          <Button $variation="secondary" onClick={() => navigate('/signup')}>
+          {/* <Button $variation="secondary" onClick={() => navigate('/signup')}>
             SignUp
-          </Button>
+          </Button> */}
           <Button disabled={isLoading}>
             {isLoading ? <SpinnerMini /> : 'Log in'}
           </Button>
