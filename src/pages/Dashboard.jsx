@@ -1,15 +1,13 @@
-import { useParams, useSearchParams } from 'react-router-dom';
-import useGetAllBooking from '../features/bookings/useGetAllBooking';
 import DashboardFilter from '../features/dashboard/DashboardFilter';
 import DashboardLayout from '../features/dashboard/DashboardLayout';
-import Heading from '../ui/Heading';
+import ResponsiveHeader from '../ui/ResponsiveHeader';
 import Row from '../ui/Row';
 
 function Dashboard() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">Dashboard</Heading>
+        <ResponsiveHeader as="h1">Dashboard</ResponsiveHeader>
         <DashboardFilter />
       </Row>
       <DashboardLayout />
