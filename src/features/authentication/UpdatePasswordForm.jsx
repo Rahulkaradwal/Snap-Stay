@@ -38,7 +38,7 @@ function UpdatePasswordForm() {
           type="password"
           id="old-password"
           autoComplete="current-password"
-          disabled={isUpdating}
+          disabled
           {...register('oldPassword', {
             required: 'This field is required',
             minLength: {
@@ -53,7 +53,7 @@ function UpdatePasswordForm() {
           type="password"
           id="password"
           autoComplete="current-password"
-          disabled={isUpdating}
+          disabled
           {...register('password', {
             required: 'This field is required',
             minLength: {
@@ -71,7 +71,7 @@ function UpdatePasswordForm() {
           type="password"
           autoComplete="new-password"
           id="passwordConfirm"
-          disabled={isUpdating}
+          disabled
           {...register('confirmPassword', {
             required: 'This field is required',
             validate: (value) =>
@@ -80,10 +80,10 @@ function UpdatePasswordForm() {
         />
       </FormRow>
       <FormRow>
-        <Button onClick={reset} type="submit" $variation="secondary">
+        <Button disabled onClick={reset} type="submit" $variation="secondary">
           Cancel
         </Button>
-        <Button disabled={isUpdating}>Update password</Button>
+        <Button disabled>Update password</Button>
       </FormRow>
     </Form>
   );

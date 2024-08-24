@@ -12,6 +12,11 @@ const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+
+  @media (min-width: 480px) {
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -41,7 +46,7 @@ const StyledNavLink = styled(NavLink)`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    color: var(--color-grey-400);
+    color: var(--color-grey-800);
     transition: all 0.3s;
   }
 
@@ -50,6 +55,37 @@ const StyledNavLink = styled(NavLink)`
   &.active:link svg,
   &.active:visited svg {
     color: var(--color-brand-600);
+  }
+
+  @media (max-width: 480px) {
+    span {
+      display: none;
+    }
+    &:link,
+    &:visited {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+
+      padding: 10px 5px;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 720px) {
+    & svg {
+      display: none; /* Hide the icon */
+    }
+
+    span {
+      display: inline; /* Ensure the span is visible */
+    }
+
+    &:link,
+    &:visited {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
   }
 `;
 

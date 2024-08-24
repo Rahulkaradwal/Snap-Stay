@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ButtonIcon = styled.button`
   background: none;
@@ -14,7 +14,7 @@ const ButtonIcon = styled.button`
   & svg {
     width: 2.2rem;
     height: 2.2rem;
-    color: var(--color-brand-600);
+    color: var(--color-grey-800);
   }
 `;
 
