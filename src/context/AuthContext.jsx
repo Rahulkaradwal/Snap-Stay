@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import getCurrentTime from '../utils/getTime';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // helper function to check if the token is expired
 
@@ -37,13 +37,13 @@ const AuthProvider = ({ children }) => {
     } else {
       logout();
     }
-  }, [expirationTime, token]);
+  }, [expirationTime, token, isAuthenticated]);
 
   useEffect(() => {
     if (token) {
       localStorage.setItem('authToken', token);
     }
-  });
+  }, [token]);
 
   const loginCtx = (token, expiration) => {
     setToken(token);

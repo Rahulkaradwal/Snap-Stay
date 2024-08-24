@@ -25,18 +25,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import { DarkModeProvider } from './context/DarkModeContext';
-import ProtectedRoute from './ui/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProtectRoute from './features/authentication/ProtectRoute';
-// import useTokenInterceptor from './context/useTokenInterceptor';
 
 const router = createBrowserRouter([
   {
-    element: (
-      <ProtectedRoute>
-        <AppLayout />
-      </ProtectedRoute>
-    ),
+    element: <AppLayout />,
     children: [
       {
         path: '/',
