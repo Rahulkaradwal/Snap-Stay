@@ -118,7 +118,6 @@ function BookingDataBox({ booking }) {
     guest,
     cabin: { name: cabinName, bookingSettings },
   } = booking;
-  console.log(booking);
 
   const [breakFast, setBreakFast] = useState();
 

@@ -71,13 +71,14 @@ const StyledNavLink = styled(NavLink)`
     }
   }
 
-  @media (min-width: 480px) and (max-width: 720px) {
+  @media (min-width: 480px) and (max-width: 1000px) {
     & svg {
       display: none; /* Hide the icon */
     }
 
     span {
       display: inline; /* Ensure the span is visible */
+      font-size: 1.2rem;
     }
 
     &:link,

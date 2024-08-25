@@ -19,6 +19,11 @@ const StyledTodayItem = styled.li`
   &:first-child {
     border-top: 1px solid var(--color-grey-100);
   }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 7rem 1fr 5rem 8rem;
+    font-size: 1rem;
+  }
 `;
 
 const Guest = styled.div`
@@ -33,7 +38,7 @@ function TodayItem({ activity }) {
       {status === 'unconfirmed' && <Tag type="green">Arriving</Tag>}
       {status === 'checked-in' && <Tag type="blue">Departing</Tag>}
       {!guest ? (
-        <Guest>No Guest Found</Guest>
+        <Guest>------</Guest>
       ) : (
         <Guest>{guest.firstName ? guest.lastName : 'No Name'}</Guest>
       )}

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Heading from '../../ui/Heading';
 import {
   Cell,
   Legend,
@@ -9,15 +8,14 @@ import {
   Tooltip,
 } from 'recharts';
 import { useDarkMode } from '../../context/DarkModeContext';
+import ResponsiveHeaders from '../../ui/ResponsiveHeaders';
 
 const ChartBox = styled.div`
-  /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
 
-  padding: 2.4rem 3.2rem;
-  grid-column: 3 / span 2;
+  padding: 2.4rem 2rem;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -149,17 +147,17 @@ function DurationChart({ confirmedStays = [] }) {
 
   return (
     <ChartBox>
-      <Heading as="h2">Stay duration summary</Heading>
-      <ResponsiveContainer width="100%" height={240}>
+      <ResponsiveHeaders>Stay duration summary</ResponsiveHeaders>
+      <ResponsiveContainer width="100%" height={180}>
         <PieChart>
           <Pie
             data={data}
             nameKey="duration"
             dataKey="value"
-            innerRadius={85}
-            outerRadius={110}
-            cx="40%"
-            cy="50%"
+            innerRadius={65}
+            outerRadius={80}
+            cx="45%"
+            cy="55%"
             paddingAngle={3}
           >
             {startData.map((entry) => (
@@ -174,9 +172,9 @@ function DurationChart({ confirmedStays = [] }) {
           <Legend
             verticalAlign="middle"
             align="right"
-            width="30%"
+            width="40%"
             layout="vertical"
-            iconSize={15}
+            iconSize={16}
             iconType="circle"
           />
         </PieChart>

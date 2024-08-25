@@ -9,11 +9,19 @@ const StyledAppLayout = styled.div`
   grid-template-rows: auto 1fr;
   height: 100vh;
 
+  @media (max-width: 1500px) {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  @media (max-width: 1300px) {
+    grid-template-columns: 15rem 1fr;
+  }
+
   @media (max-width: 480px) {
     grid-template-columns: 5rem 1fr;
   }
-  @media (min-width: 480px) and (max-width: 720px) {
-    grid-template-columns: 15rem 1fr;
+  @media (min-width: 480px) and (max-width: 1000px) {
+    grid-template-columns: 10rem 1fr;
   }
 `;
 
@@ -23,11 +31,11 @@ const Main = styled.main`
   overflow: scroll;
 
   @media (max-width: 480px) {
-    padding: 2rem 2rem 6.4rem;
+    padding: 0.5rem 0.5rem 1rem;
   }
 
-  @media (min-width: 480px) and (max-width: 720px) {
-    padding: 2rem 2rem 6.4rem;
+  @media (min-width: 480px) and (max-width: 1000px) {
+    padding: 1.2rem 1.2rem 4rem;
   }
 `;
 

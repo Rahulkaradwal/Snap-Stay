@@ -10,10 +10,23 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import Heading from '../../ui/Heading';
+import ResponsiveHeaders from '../../ui/ResponsiveHeaders';
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
+  padding: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem; /* Reduce padding for smaller screens */
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.2rem; /* Further reduce padding for mobile devices */
+  }
 `;
 
 const fakeData = [
@@ -66,27 +79,34 @@ function SalesChart() {
         background: '#fff',
       };
 
+  // Set default parameters for XAxis and YAxis using direct prop assignment
+  const xAxisProps = {
+    dataKey: 'label',
+    tick: { fill: colors.text, fontSize: '0.875rem' },
+    tickLine: { stroke: colors.text },
+  };
+
+  const yAxisProps = {
+    unit: '$',
+    width: 40,
+    tickMargin: 10,
+    tick: { fill: colors.text, fontSize: '0.875rem' },
+    tickLine: { stroke: colors.text },
+  };
+
   return (
     <StyledSalesChart>
-      <Heading as="h2">Sales</Heading>
-      <ResponsiveContainer height={300} width="100%">
+      <ResponsiveHeaders>Sales</ResponsiveHeaders>
+      <ResponsiveContainer width="100%" height={300}>
         <AreaChart data={fakeData}>
-          <XAxis
-            dataKey="label"
-            tick={{ fill: colors.text }}
-            tickLine={{ stroke: colors.text }}
-          />
-
-          <YAxis
-            unit="$"
-            tick={{ fill: colors.text }}
-            tickLine={{ stroke: colors.text }}
-          />
+          {/* Spread props to pass all required properties */}
+          <XAxis {...xAxisProps} />
+          <YAxis {...yAxisProps} />
           <CartesianGrid stroke={strokeColor} />
           <Tooltip contentStyle={{ backgroundColor: colors.background }} />
           <Area
-            dataKey="totalSales"
             type="monotone"
+            dataKey="totalSales"
             stroke={colors.totalSales.stroke}
             fill={colors.totalSales.fill}
             strokeWidth={2}
@@ -94,8 +114,8 @@ function SalesChart() {
             unit="$"
           />
           <Area
-            dataKey="extrasSales"
             type="monotone"
+            dataKey="extrasSales"
             stroke={colors.extrasSales.stroke}
             fill={colors.extrasSales.fill}
             strokeWidth={2}
