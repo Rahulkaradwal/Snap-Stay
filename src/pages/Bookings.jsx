@@ -8,6 +8,7 @@ const BookingDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  overflow-x: hidden;
 `;
 
 function Bookings() {

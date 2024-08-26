@@ -5,10 +5,18 @@ import CabinTable from '../features/cabins/CabinTable';
 import AddCabin from '../features/cabins/AddCabin';
 import CabinTableOperations from './CabinTableOperations';
 import ResponsiveHeader from '../ui/ResponsiveHeader';
+import styled from 'styled-components';
+
+const CabinDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  overflow-x: hidden;
+`;
 
 function Cabins() {
   return (
-    <>
+    <CabinDiv>
       <Row type="horizontal">
         <ResponsiveHeader>All cabins</ResponsiveHeader>
         <CabinTableOperations />
@@ -20,7 +28,7 @@ function Cabins() {
       <Row>
         <AddCabin />
       </Row>
-    </>
+    </CabinDiv>
   );
 }
 
