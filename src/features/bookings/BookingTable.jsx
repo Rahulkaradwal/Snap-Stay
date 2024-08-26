@@ -11,11 +11,17 @@ const Table = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+
+  @media (max-width: 780px) {
+    /* padding-right: 0.5rem; */
+    margin-right: 0.3rem;
+  }
 `;
 
 const TableHeader = styled.header`
   display: grid;
-  grid-template-columns: 0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem;
+  /* 0.8fr 1.2fr 1.8fr 1.4fr 7rem */
+  grid-template-columns: 1.4fr 2fr 3fr 1.4fr 1fr 3.2rem;
   column-gap: 2.4rem;
   align-items: center;
   background-color: var(--color-grey-50);
@@ -25,6 +31,10 @@ const TableHeader = styled.header`
   font-weight: 600;
   color: var(--color-grey-600);
   padding: 1.6rem 2.4rem;
+
+  @media (max-width: 780px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Footer = styled.footer`

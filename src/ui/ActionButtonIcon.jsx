@@ -16,6 +16,12 @@ const ActionButtonIcon = styled.button`
     height: 2rem;
     color: var(--color-grey-700);
   }
+  @media (max-width: 780px) {
+    & svg {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+  }
 `;
 
 export default ActionButtonIcon;

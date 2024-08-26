@@ -1,13 +1,13 @@
 import BookingTable from '../features/bookings/BookingTable';
-import Heading from '../ui/Heading';
 import Row from '../ui/Row';
 import BookingTableOperations from '../features/bookings/BookingTableOperations';
+import ResponsiveHeader from '../ui/ResponsiveHeader';
 
 function Bookings() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All bookings</Heading>
+        <ResponsiveHeader>All bookings</ResponsiveHeader>
         <BookingTableOperations />
       </Row>
       <Row>

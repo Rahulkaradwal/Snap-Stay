@@ -13,7 +13,7 @@ const StyledDashboardLayout = styled.div`
   /* overflow: hidden; */
 
   @media (max-width: 768px) {
-    padding: 0 0.5rem;
+    padding-right: 0.5rem;
   }
 `;
 
