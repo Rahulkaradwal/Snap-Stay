@@ -5,12 +5,13 @@ import CabinTable from '../features/cabins/CabinTable';
 
 import AddCabin from '../features/cabins/AddCabin';
 import CabinTableOperations from './CabinTableOperations';
+import ResponsiveHeader from '../ui/ResponsiveHeader';
 
 function Cabins() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All cabins</Heading>
+        <ResponsiveHeader>All cabins</ResponsiveHeader>
         <CabinTableOperations />
       </Row>
 

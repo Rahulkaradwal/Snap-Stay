@@ -29,6 +29,15 @@ const TableHeader = styled.header`
   font-weight: 600;
   color: var(--color-grey-600);
   padding: 1.6rem 2.4rem;
+
+  @media (max-width: 780px) {
+    font-size: 1.1rem;
+  }
+  @media (max-width: 480px) {
+    /* padding: 1.6rem 2.4rem; */
+    padding: 2rem 0.2rem;
+    margin-left: -2.5rem;
+  }
 `;
 
 function CabinTable() {

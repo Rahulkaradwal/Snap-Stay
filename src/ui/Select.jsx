@@ -14,7 +14,7 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 
   @media (max-width: 480px) {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     width: 7rem;
     height: 4.2rem;
   }

@@ -14,8 +14,16 @@ const TableRow = styled.div`
   align-items: center;
   padding: 1.4rem 2.4rem;
 
+  justify-content: space-between;
+
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 5.5rem 4rem 5rem 1rem 3rem;
+    font-size: 1.2rem;
+    column-gap: 1rem;
   }
 `;
 
@@ -26,6 +34,10 @@ const Img = styled.img`
   object-fit: cover;
   object-position: center;
   transform: scale(1.5) translateX(-7px);
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const Cabin = styled.div`
@@ -33,6 +45,10 @@ const Cabin = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: 'Sono';
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const Price = styled.div`

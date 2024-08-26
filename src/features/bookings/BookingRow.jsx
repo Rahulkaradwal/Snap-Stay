@@ -21,6 +21,7 @@ const TableRow = styled.div`
   column-gap: 2.4rem;
   align-items: center;
   padding: 1.4rem 2.4rem;
+  justify-content: space-between;
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
@@ -30,7 +31,6 @@ const TableRow = styled.div`
     grid-template-columns: 6rem 6rem 9rem 6rem 3rem;
     column-gap: 0.3rem;
     align-items: baseline;
-
     padding: 0.5rem;
   }
 `;

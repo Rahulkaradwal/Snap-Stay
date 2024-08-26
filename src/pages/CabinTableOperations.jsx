@@ -1,8 +1,9 @@
 import Filter from '../ui/Filter';
 import SortBy from '../ui/SortBy';
+import TableOperations from '../ui/TableOperations';
 function CabinTableOperations() {
   return (
-    <>
+    <TableOperations>
       <Filter
         filterField="discount"
         options={[
@@ -26,7 +27,7 @@ function CabinTableOperations() {
           { value: 'maxCapacity-asc', label: 'Sort by capaity (low first)' },
         ]}
       />
-    </>
+    </TableOperations>
   );
 }
 

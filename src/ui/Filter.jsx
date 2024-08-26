@@ -38,12 +38,14 @@ const FilterButton = styled.button`
   transition: all 0.3s;
 
   @media (max-width: 480px) {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     width: 100%;
+    height: 3.5rem;
   }
 
   @media (min-width: 480px) and (max-width: 720px) {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
+    height: 3.5rem;
   }
 
   &:hover:not(:disabled) {
