@@ -8,14 +8,14 @@ const StyledFilter = styled.div`
   border-radius: var(--border-radius-sm);
   padding: 0.4rem;
   display: flex;
-  gap: 0.4rem;
+  /* gap: 0.4rem; */
+  justify-content: space-between;
 
   @media (max-width: 480px) {
     gap: 0.8rem;
     margin-top: 1.5rem;
     margin-bottom: -1.5rem;
     margin-left: 1.8rem;
-    width: 90%;
   }
 `;
 
@@ -38,8 +38,8 @@ const FilterButton = styled.button`
   transition: all 0.3s;
 
   @media (max-width: 480px) {
-    font-size: 1.1rem;
-    width: 100%;
+    font-size: 1rem;
+    width: 90%;
     height: 3.5rem;
   }
 

@@ -15,7 +15,7 @@ const StyledSelect = styled.select`
 
   @media (max-width: 480px) {
     font-size: 1.1rem;
-    width: 7rem;
+    width: 100%;
     height: 4.2rem;
   }
 `;
