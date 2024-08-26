@@ -26,7 +26,6 @@ const StyledToday = styled.div`
   }
 
   @media (max-width: 460px) {
-    width: 98%;
     padding: 1.6rem;
     gap: 1.6rem;
   }

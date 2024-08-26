@@ -10,7 +10,11 @@ import TodayActivity from '../check-in-out/TodayActivity';
 const StyledDashboardLayout = styled.div`
   display: grid;
   gap: 2.4rem;
-  overflow: hidden;
+  /* overflow: hidden; */
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const StyleActivity = styled.div`
