@@ -35,6 +35,12 @@ const StyledFormRow = styled.div`
         gap: 1.2rem;
       }
     `}
+
+  @media (max-width: 768px) {
+    grid-template-columns: ${(props) =>
+      props.orientation === 'vertical' ? '1fr' : '8rem 10rem 0.5rem '};
+    gap: ${(props) => (props.orientation === 'vertical' ? '0.8rem' : '2.4rem')};
+  }
 `;
 
 const Label = styled.label`
