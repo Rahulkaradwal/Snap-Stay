@@ -1,13 +1,13 @@
 import UserTable from '../features/users/UserTable';
 import UserTableOperations from '../features/users/UserTableOperations';
-import Heading from '../ui/Heading';
+import ResponsiveHeader from '../ui/ResponsiveHeader';
 import Row from '../ui/Row';
 
 function NewUsers() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Guests</Heading>
+        <ResponsiveHeader>All Users</ResponsiveHeader>
         <UserTableOperations />
       </Row>
       <Row>

@@ -20,6 +20,16 @@ const TableRow = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
+
+  @media (max-width: 780px) {
+    /* padding-right: 0.5rem; */
+    display: grid;
+    grid-template-columns: 7rem 8rem 5rem 4.5rem 3.5rem;
+    column-gap: 0.3rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 const Name = styled.div`
@@ -27,12 +37,20 @@ const Name = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: 'Sono';
+
+  @media (max-width: 780px) {
+    font-size: 1rem;
+  }
 `;
 const Status = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: 'Sono';
+
+  @media (max-width: 780px) {
+    font-size: 1rem;
+  }
 `;
 
 const Joined = styled.div`
@@ -40,20 +58,22 @@ const Joined = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: 'Sono';
+
+  @media (max-width: 780px) {
+    font-size: 1rem;
+  }
 `;
 
 const Email = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: 'Sono';
 
-  & span:first-child {
-    font-weight: 500;
-  }
-
-  & span:last-child {
-    color: var(--color-grey-500);
-    font-size: 1.2rem;
+  @media (max-width: 780px) {
+    font-size: 0.9rem;
+    width: 7rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 `;
 const ButtonIcon = styled.div`
@@ -69,6 +89,13 @@ const ButtonIcon = styled.div`
 
   & span:last-child {
     font-size: 1.8rem;
+  }
+
+  @media (max-width: 780px) {
+    font-size: 1rem;
+    gap: 0.2rem;
+    flex-direction: column;
+    margin-right: -1rem;
   }
 `;
 
