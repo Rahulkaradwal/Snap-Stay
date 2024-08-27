@@ -2,8 +2,15 @@ import URL from './URL';
 import { getToday } from '../utils/helpers';
 
 export async function getAllBooking(sort, filter, page) {
+  const token = localStorage.getItem('authToken');
   const res = await fetch(
-    `${URL}/bookings/getAllBooking?status=${filter}&sort=${sort}&page=${page}`
+    `${URL}/bookings/getAllBooking?status=${filter}&sort=${sort}&page=${page}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
   );
   if (!res.ok) {
     throw new Error('Bookings cound not be loaded');
@@ -37,9 +44,14 @@ export async function updateBookingStatus(bookingId, formdata) {
 }
 
 export async function deleteBooking(id) {
+  const token = localStorage.getItem('authToken');
   try {
-    await fetch(`${URL}/bookings/getBooking/${id}`, {
+    await fetch(`${URL}/bookings/deleteBooking/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (err) {
     throw new Error('Could not deleted');
