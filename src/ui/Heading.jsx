@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const baseHeadingStyles = css`
-  font-size: 1.4rem;
+  font-size: 1rem;
   line-height: 1.4;
   font-weight: 600;
 

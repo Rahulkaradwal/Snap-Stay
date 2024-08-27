@@ -18,6 +18,15 @@ const HeadingGroup = styled.div`
   align-items: center;
 `;
 
+const BookingDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.6rem;
+  overflow-x: hidden;
+
+  padding: 3rem 1rem;
+`;
+
 function BookingDetail() {
   // custom hooks
   const moveBack = useMoveBack();
@@ -37,7 +46,7 @@ function BookingDetail() {
   if (!booking) return <p>Sorry! No Booking Found</p>;
 
   return (
-    <>
+    <BookingDiv>
       <Row type="horizontal">
         <HeadingGroup>
           <Heading as="h1">Booking #{booking.cabin.name}</Heading>
@@ -51,7 +60,7 @@ function BookingDetail() {
       <BookingDataBox booking={booking} />
 
       <CheckingBooking booking={booking} />
-    </>
+    </BookingDiv>
   );
 }
 

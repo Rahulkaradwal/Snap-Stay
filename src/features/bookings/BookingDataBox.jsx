@@ -18,7 +18,6 @@ const StyledBookingDataBox = styled.section`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
-
   overflow: hidden;
 `;
 
@@ -50,10 +49,32 @@ const Header = styled.header`
     font-size: 2rem;
     margin-left: 4px;
   }
+
+  @media (max-width: 780px) {
+    font-size: 1.4rem;
+    padding: 2.2rem 1rem;
+    justify-content: space-between;
+    gap: 2rem;
+
+    & p,
+    span {
+      font-size: 1rem;
+    }
+    svg {
+      height: 3.5rem;
+      width: 3.5rem;
+      /* margin-right: -0.87rem; */
+    }
+  }
 `;
 
 const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
+
+  @media (max-width: 780px) {
+    overflow: hidden;
+    padding: 2rem;
+  }
 `;
 
 const Guest = styled.div`
@@ -66,6 +87,13 @@ const Guest = styled.div`
   & p:first-of-type {
     font-weight: 500;
     color: var(--color-grey-700);
+  }
+
+  @media (max-width: 780px) {
+    width: 100%;
+
+    justify-content: space-between;
+    font-size: 1rem;
   }
 `;
 
@@ -93,6 +121,18 @@ const Price = styled.div`
     width: 2.4rem;
     color: currentColor !important;
   }
+
+  @media (max-width: 780px) {
+    svg {
+      height: 1.4rem;
+      width: 1.4rem;
+    }
+    & p:last-child {
+      text-transform: uppercase;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
 `;
 
 const Footer = styled.footer`
@@ -100,7 +140,41 @@ const Footer = styled.footer`
   font-size: 1.2rem;
   color: var(--color-grey-500);
   text-align: right;
+
+  @media (max-width: 780px) {
+    font-size: 0.9rem;
+  }
 `;
+const Email = styled.div`
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: 'Sono';
+
+  @media (max-width: 780px) {
+    font-size: 0.9rem;
+    width: 7rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+`;
+
+// Helper function to get a random country code
+const getRandomCountryCode = () => {
+  const countryCodes = [
+    'IN',
+    'US',
+    'GB',
+    'FR',
+    'DE',
+    'JP',
+    'CN',
+    'BR',
+    'RU',
+    'ZA',
+  ];
+  const randomIndex = Math.floor(Math.random() * countryCodes.length);
+  return countryCodes[randomIndex];
+};
 
 // A purely presentational component
 function BookingDataBox({ booking }) {
@@ -119,16 +193,18 @@ function BookingDataBox({ booking }) {
     cabin: { name: cabinName, bookingSettings },
   } = booking;
 
-  const [breakFast, setBreakFast] = useState();
+  const [breakfastPrice, setBreakfastPrice] = useState(0);
+  const [randomCountryCode, setRandomCountryCode] = useState(
+    getRandomCountryCode()
+  );
 
   useEffect(() => {
     if (bookingSettings) {
-      setBreakFast(bookingSettings.breakfastPrice);
+      setBreakfastPrice(bookingSettings.breakfastPrice || 0);
     }
-  }, [booking, bookingSettings]);
+  }, [bookingSettings]);
 
-  let extrasPrice = breakFast + totalPrice;
-  console.log(breakFast, extrasPrice);
+  const extrasPrice = totalPrice + (hasBreakfast ? breakfastPrice : 0);
 
   return (
     <StyledBookingDataBox>
@@ -152,16 +228,15 @@ function BookingDataBox({ booking }) {
       <Section>
         <Guest>
           <Flag
-            src={'https://flagsapi.com/IN/flat/64.png'}
-            alt={`Flag of India`}
+            src={`https://flagsapi.com/${randomCountryCode}/flat/64.png`}
+            alt={`Flag of ${randomCountryCode}`}
           />
-          {/* {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />} */}
           <p>
             {`${guest.firstName} ${guest.lastName}`}{' '}
             {numGuests > 1 ? `+ ${numGuests - 1} guests` : ''}
           </p>
           <span>&bull;</span>
-          <p>{guest.email}</p>
+          <Email>{guest.email}</Email>
           <span>&bull;</span>
           <p>Contact No. {guest.phoneNumber}</p>
         </Guest>
@@ -180,11 +255,11 @@ function BookingDataBox({ booking }) {
         </DataItem>
 
         <Price $isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+          <DataItem icon={<HiOutlineCurrencyDollar />} label="Total price">
             {formatCurrency(extrasPrice)}
             {hasBreakfast &&
               ` (${formatCurrency(totalPrice)} cabin + ${formatCurrency(
-                breakFast
+                breakfastPrice
               )} breakfast)`}
           </DataItem>
 
