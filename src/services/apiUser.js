@@ -42,9 +42,14 @@ export async function updateGuestStatus(data, id) {
 }
 
 export async function deleteGuestApi(id) {
+  const token = localStorage.getItem('authToken');
   try {
     await fetch(`${URL}/guests/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (err) {
     throw new Error('Sorry! Could not delete the user');

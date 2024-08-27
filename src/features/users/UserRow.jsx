@@ -125,12 +125,12 @@ function UserRow({ user }) {
       <Status>{status ? 'Active' : 'De-active'}</Status>
       <ButtonIcon>
         <Modal>
-          <Modal.Open modalName="updateUserStatus">
+          {/* <Modal.Open modalName="updateUserStatus">
             <ActionButtonIcon disabled={isLoading}>
               {status === true ? <GiSightDisabled /> : <GrView />}
             </ActionButtonIcon>
-          </Modal.Open>
-          <Modal.Window windowName="updateUserStatus">
+          </Modal.Open> */}
+          {/* <Modal.Window windowName="updateUserStatus">
             <ConfirmDelete
               resourceName={lastName}
               actionName="Change Status for"
@@ -139,7 +139,7 @@ function UserRow({ user }) {
           </Modal.Window>
           <ActionButtonIcon>
             <HiPencil />
-          </ActionButtonIcon>
+          </ActionButtonIcon> */}
 
           <Modal.Open modalName="deleteUser">
             <ActionButtonIcon disabled={deleteLoading}>
