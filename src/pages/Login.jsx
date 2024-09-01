@@ -27,11 +27,27 @@ const LoginLayout = styled.main`
   }
 `;
 
+const Note = styled.label`
+  font-weight: 500;
+  font-size: 1rem;
+
+  @media (min-width: 768px) {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.2rem;
+  }
+`;
+
 function Login() {
   return (
     <LoginLayout>
       <Logo />
       <Heading as="h4">Log in to your account</Heading>
+      <Note>
+        <strong>Credentials:</strong> admin@gmail.com / admin@123
+      </Note>
       <LoginForm />
     </LoginLayout>
   );
